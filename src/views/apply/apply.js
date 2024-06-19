@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "../homepage/header";
-import Footer from "../homepage/footer";
+import Header from "../homepage/pages/header";
+import Footer from "../homepage/pages/footer";
 import img1 from "./assets/visa.jpeg";
 
 export default function apply() {

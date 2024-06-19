@@ -1,9 +1,9 @@
 import React from "react";
-import visaLogo from "./assets/visaLogo.png";
-import JCBLogo from "./assets/JCBLogo.png";
-import UnionPayLogo from "./assets/UnionPayLogo.png";
-import MasterCardLogo from "./assets/masterCard.png";
-import AliPayLogo from "./assets/AlipayLogo.svg";
+import visaLogo from "../assets/visaLogo.png";
+import JCBLogo from "../assets/JCBLogo.png";
+import UnionPayLogo from "../assets/UnionPayLogo.png";
+import MasterCardLogo from "../assets/masterCard.png";
+import AliPayLogo from "../assets/AlipayLogo.svg";
 import { useNavigate } from "react-router";
 
 export default function Footer() {

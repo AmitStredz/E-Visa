@@ -17,7 +17,7 @@ export default function Header() {
         <a className="cursor-pointer">Blog</a>
       </div>
       <div className="flex items-center">
-        <button className="p-2 px-4 border border-slate-800 rounded-xl bg-red-600 bg-opacity-80">
+        <button className="p-2 px-4 border border-slate-800 rounded-xl bg-red-600 bg-opacity-80 text-white">
           Contact Us
         </button>
       </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router";
-import turkeyLogo from '../assets/turkeyLogo2.jpg'
+import turkeyLogo from '../assets/logo2.png'
 
 export default function Header() {
   const navigate = useNavigate();
@@ -8,7 +8,7 @@ export default function Header() {
   return (
     <div className="w-screen h-24 top-0 flex gap-5 justify-between p-5 px-20 text-black bg-slate-200">
       <div className="flex items-center cursor-pointer">
-        <img src={turkeyLogo} className="w-12"></img>
+        <img src={turkeyLogo} className="w-14"></img>
         <a className="text-[30px] font-bold text-red-600" onClick={() => navigate('/homePage')}>Visify</a>
       {/* <div className="leading-5">
         <p>Republic of Turkey</p>

@@ -8,7 +8,7 @@ import Footer from "./pages/footer";
 
 export default function Homepage() {
   return (
-    <div className=" text-white overflow-hidden">
+    <div className=" text-white overflow-hidden bg-slate-00">
       <Header></Header>
       <div className=""  >
         <Page1></Page1>

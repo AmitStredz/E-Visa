@@ -1,10 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router";
+
 import Header from "../homepage/pages/header";
 import Footer from "../homepage/pages/footer";
 import img1 from "./assets/applyBanner.jpg";
 import captchaImg from "./assets/captchaImg.png";
 
-export default function apply() {
+export default function Apply() {
+  const navigate = useNavigate();
+
   return (
     <div className="overflow-hidden text-black relative">
       <Header></Header>
@@ -17,6 +21,9 @@ export default function apply() {
       <div className="w-full flex justify-center h mb-10">
         <div className="w-4/5 justify-start py-10 flex flex-col gap-5">
           <h1 className="text-[28px] font-semibold ">Application</h1>
+          <div className="flex items-center gap-1">
+            <p className="font-semibold">Country/Region</p>
+          </div>
 
           <form action="#" method="POST" className="w-2/5 gap-3">
             {/* <!-- Visa Type --> */}
@@ -94,6 +101,7 @@ export default function apply() {
                 I have an ongoing application
               </button>
               <button
+              onClick={()=> navigate('/arrivaldate')}
                 type="submit"
                 name="save-continue"
                 class="w-5/12 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"

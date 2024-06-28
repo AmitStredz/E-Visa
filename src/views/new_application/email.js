@@ -8,21 +8,14 @@ import img1 from "./assets/applyBanner.jpg";
 import TermsModal from "./termsModal";
 
 export default function Personal_info() {
-  const [showModal, setShowModal] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
+  const [mailSent, setMailSent] = useState(false);
   const navigate = useNavigate();
 
-  const handleCheckboxClick = () => {
-    if (isChecked) {
-      setIsChecked(false);
-    } else {
-      setShowModal(true);
-    }
-  };
-
-  const handleModalClose = () => {
-    setShowModal(false);
-    setIsChecked(!isChecked);
+  const handleResendClick = () => {
+    setMailSent(true);
+    setTimeout(() => {
+      setMailSent(false);
+    }, "4000");
   };
 
   return (
@@ -50,11 +43,21 @@ export default function Personal_info() {
               instructions and proceed with the payment. If you did not receive
               an e-mail message, click the button below to resend.
             </p>
-            <div className="flex justify-center">
-              <button className=" bg-blue-500 text-white p-2 px-10 rounded">
-                Resend e-mail
-              </button>
-            </div>
+            {mailSent ? (
+              <div className="text-center text-[24px] font-semibold text-green-600">
+                <p data-aos="fade-in">Email Sent Succesfully...</p>
+              </div>
+            ) : (
+              <div className="flex justify-center">
+                <button
+                  className=" w-5/12 py-4 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium bg-blue-600 hover:bg-blue-700 text-white"
+                  data-aos="fade-in"
+                  onClick={handleResendClick}
+                >
+                  Resend e-mail
+                </button>
+              </div>
+            )}
           </div>
 
           <div

@@ -148,7 +148,7 @@ export default function Arrivaldate() {
                 onClick={handleNextClick}
                 type="submit"
                 name="save-continue"
-                class="w-44 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                class="w-48 py-4 text-white border border-transparent rounded-md shadow-sm text-sm font-medium bg-green-600 hover:bg-green-700"
               >
                 {isLoading ? "Loading..." : "Save and Continue"}
               </button>

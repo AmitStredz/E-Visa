@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
+import Select from "react-select";
+import countryList from "react-select-country-list";
 import { useNavigate } from "react-router";
-import ReactFlagsSelect from "react-flags-select";
+
+import ReCAPTCHA from "react-google-recaptcha";
 
 import Header from "../homepage/pages/header";
 import Footer from "../homepage/pages/footer";
@@ -14,7 +17,21 @@ export default function Apply() {
   const [travelDoc, setTravelDoc] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
+  const [capVal, setCapVal] = useState("");
   const navigate = useNavigate();
+
+  function CountrySelector() {
+    const [value, setValue] = useState("");
+    const options = useMemo(() => countryList().getData(), []);
+
+    const changeHandler = (value) => {
+      setValue(value);
+      setCountryRegion(value.label);
+      // console.log("Value: ", value.label);
+    };
+
+    return <Select options={options} value={value} onChange={changeHandler} />;
+  }
 
   const handleNextClick = async () => {
     if (isLoading) return; // Prevent multiple clicks
@@ -70,7 +87,7 @@ export default function Apply() {
                 onChange={(e) => setVisaType(e.target.value)}
                 id="visa-type"
                 name="visa-type"
-                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm cursor-pointer"
+                class="mt-1 block w-full py-2 p-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm cursor-pointer"
               >
                 <option value="" disabled selected>
                   Select a Visa type
@@ -86,7 +103,7 @@ export default function Apply() {
               <label for="country-region" class="block text-md ">
                 Country/Region
               </label>
-              {/* <input
+              {/* <select
                 value={countryRegion}
                 onChange={(e) => setCountryRegion(e.target.value)}
                 type="text"
@@ -94,13 +111,15 @@ export default function Apply() {
                 name="country-region"
                 className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 required
-              /> */}
-              <ReactFlagsSelect
+              ></select> */}
+              {/* <ReactFlagsSelect
+              // countryName={}
                 searchable
                 value = {countryRegion}
                 selected={countryRegion}
                 onSelect={(code) => setCountryRegion(code)}
-              />
+              /> */}
+              <div>{CountrySelector()}</div>
             </div>
             {/* <!-- Travel Document --> */}
             <div className="mb-4">
@@ -129,7 +148,11 @@ export default function Apply() {
               </select>
             </div>
             {/* <!-- Security Verification --> */}
-            <div className="mb-4">
+            <ReCAPTCHA
+              sitekey="6LfBywMqAAAAANVw0lvasqSPQ3yEO2gn3sHSPxjU"
+              onChange={(val) => setCapVal(val)}
+            ></ReCAPTCHA>
+            {/* <div className="mb-4">
               <label for="captcha" class="block text-md ">
                 Security Verification
               </label>
@@ -142,21 +165,27 @@ export default function Apply() {
                 required
               />
             </div>
-            <img src={captchaImg}></img>
+            <img src={captchaImg}></img> */}
             {/* <!-- Submit Buttons --> */}
             <div class="flex justify-between mt-5">
               <button
                 type="submit"
+                disabled={!capVal}
                 name="ongoing-application"
-                className="w-5/12 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium  bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                className={`w-5/12 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium  ${
+                  capVal ? "text-white bg-blue-600 hover:bg-blue-700" : "bg-blue-300"
+                }`}
               >
                 I have an ongoing application
               </button>
               <button
                 onClick={handleNextClick}
                 type="submit"
+                disabled={!capVal}
                 name="save-continue"
-                className="w-5/12 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                className={`w-5/12 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium  ${
+                  capVal ? "text-white bg-green-600 hover:bg-green-700" : "bg-green-300"
+                }`}
               >
                 {isLoading ? "Loading..." : "Save and Continue"}
               </button>

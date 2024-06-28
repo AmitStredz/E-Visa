@@ -34,25 +34,27 @@ export default function Prerequisites() {
     setPrerequisitesCheck(allChecked);
   });
 
-
   const handleNextClick = async () => {
-    if(isLoading) return;  //prevents from multiple clicks
+    if (isLoading) return; //prevents from multiple clicks
     setIsLoading(true);
 
-    if (allChecked){
-      try{
-        const response = await axios.post("http://localhost:8000/api/visa-applications/", {
-          prerequisites_check : true
-        });
-        navigate('/personalinfo');
-      }catch(error){
+    if (allChecked) {
+      try {
+        const response = await axios.post(
+          "http://localhost:8000/api/visa-applications/",
+          {
+            prerequisites_check: true,
+          }
+        );
+        navigate("/personalinfo");
+      } catch (error) {
         console.log("Error Occured...");
         alert("Error:" + (error.response?.data || error.message));
-      }finally{
+      } finally {
         setIsLoading(false);
       }
     }
-  }
+  };
   return (
     <div className="overflow-hidden text-black relative">
       <Header></Header>
@@ -145,11 +147,15 @@ export default function Prerequisites() {
           <div className="flex justify-center w-[50rem]">
             <button
               disabled={!allChecked}
-              className= {`bg-blue-500 text-white p-2 px-10 rounded ${allChecked ? "" : "bg-blue-300"}`}
+              className={`w-48 py-4 px-8 border border-transparent rounded-md shadow-sm text-sm font-medium  ${
+                allChecked
+                  ? "text-white bg-blue-600 hover:bg-blue-700"
+                  : "bg-blue-300"
+              }`}
               onClick={handleNextClick}
             >
-                {isLoading ? "Loading..." : "Save and Continue"}
-                </button>
+              {isLoading ? "Loading..." : "Save and Continue"}
+            </button>
           </div>
         </div>
       </div>

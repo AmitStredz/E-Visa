@@ -380,8 +380,8 @@ export default function Personal_info() {
                 disabled={!isChecked}
                 type="submit"
                 name="save-continue"
-                class={`w-5/12 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium bg-blue-600   ${
-                  isChecked ? "hover:bg-blue-700" : "bg-gray-500 bg-opacity-40"
+                class={`w-5/12 py-4 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium bg-blue-600   ${
+                  isChecked ? "text-white hover:bg-blue-700" : "bg-blue-300"
                 }`}
               >
                 Add a new Person
@@ -391,8 +391,8 @@ export default function Personal_info() {
                 disabled={!isChecked}
                 type="submit"
                 name="save-continue"
-                class={`w-5/12 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium bg-green-600   ${
-                  isChecked ? "hover:bg-green-700" : "bg-gray-500 bg-opacity-40"
+                class={`w-5/12 py-4 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium bg-green-600   ${
+                  isChecked ? "text-white hover:bg-green-700" : "bg-green-300"
                 }`}
               >
                 {isLoading ? "Loading..." : "Save and Continue"}

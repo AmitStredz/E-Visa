@@ -97,8 +97,9 @@ export default function Apply() {
               /> */}
               <ReactFlagsSelect
                 searchable
+                value = {countryRegion}
                 selected={countryRegion}
-                onSelect={(code) => setCountryRegion(code.target.value)}
+                onSelect={(code) => setCountryRegion(code)}
               />
             </div>
             {/* <!-- Travel Document --> */}

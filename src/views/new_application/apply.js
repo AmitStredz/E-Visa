@@ -1,13 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import ReactFlagsSelect from "react-flags-select";
 
 import Header from "../homepage/pages/header";
 import Footer from "../homepage/pages/footer";
 import img1 from "./assets/applyBanner.jpg";
 import captchaImg from "./assets/captchaImg.png";
+import axios from "axios";
 
 export default function Apply() {
+  const [visaType, setVisaType] = useState("");
+  const [countryRegion, setCountryRegion] = useState("");
+  const [travelDoc, setTravelDoc] = useState("");
+
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  const handleNextClick = async () => {
+    if (isLoading) return; // Prevent multiple clicks
+    setIsLoading(true);
+
+    const data = {
+      visa_type: visaType,
+      country_region: countryRegion,
+      travel_document: travelDoc,
+    };
+
+    console.log("Apply: ", data);
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/visa-applications/",
+        data
+      );
+
+      navigate("/arrivalDate");
+    } catch (error) {
+      setIsLoading(false);
+      console.error("There was an error!", error);
+      alert("Error:" + (error.response?.data || error.message));
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="overflow-hidden text-black relative">
@@ -32,10 +66,15 @@ export default function Apply() {
                 Visa Type
               </label>
               <select
+                value={visaType}
+                onChange={(e) => setVisaType(e.target.value)}
                 id="visa-type"
                 name="visa-type"
                 class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm cursor-pointer"
               >
+                <option value="" disabled selected>
+                  Select a Visa type
+                </option>
                 <option value="electronic-visa">Electronic Visa</option>
                 <option value="airport-transit-visa">
                   Airport Transit Visa
@@ -47,24 +86,36 @@ export default function Apply() {
               <label for="country-region" class="block text-md ">
                 Country/Region
               </label>
-              <input
+              {/* <input
+                value={countryRegion}
+                onChange={(e) => setCountryRegion(e.target.value)}
                 type="text"
                 id="country-region"
                 name="country-region"
-                class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 required
+              /> */}
+              <ReactFlagsSelect
+                searchable
+                selected={countryRegion}
+                onSelect={(code) => setCountryRegion(code.target.value)}
               />
             </div>
             {/* <!-- Travel Document --> */}
-            <div class="mb-4">
-              <label for="travel-document" class="block text-md ">
+            <div className="mb-4">
+              <label for="travel-document" className="block text-md ">
                 Travel Document
               </label>
               <select
+                value={travelDoc}
+                onChange={(e) => setTravelDoc(e.target.value)}
                 id="travel-document"
                 name="travel-document"
-                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm cursor-pointer"
+                className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm cursor-pointer"
               >
+                <option value="" disabled selected>
+                  Select a Travel Document type
+                </option>
                 <option value="ordinary-passport">Ordinary Passport</option>
                 <option value="identity-card">Identity Card</option>
                 <option value="diplomatic-passport">Diplomatic Passport</option>
@@ -77,7 +128,7 @@ export default function Apply() {
               </select>
             </div>
             {/* <!-- Security Verification --> */}
-            <div class="mb-4">
+            <div className="mb-4">
               <label for="captcha" class="block text-md ">
                 Security Verification
               </label>
@@ -86,7 +137,7 @@ export default function Apply() {
                 id="captcha"
                 name="captcha"
                 placeholder="Enter the captcha code"
-                class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 required
               />
             </div>
@@ -96,17 +147,17 @@ export default function Apply() {
               <button
                 type="submit"
                 name="ongoing-application"
-                class="w-5/12 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium  bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                className="w-5/12 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium  bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
                 I have an ongoing application
               </button>
               <button
-              onClick={()=> navigate('/arrivaldate')}
+                onClick={handleNextClick}
                 type="submit"
                 name="save-continue"
-                class="w-5/12 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                className="w-5/12 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
               >
-                Save and Continue
+                {isLoading ? "Loading..." : "Save and Continue"}
               </button>
             </div>
           </form>
@@ -186,8 +237,6 @@ export default function Apply() {
               </ul>
             </ul>
           </div>
-
-          
         </div>
       </div>
       <Footer></Footer>

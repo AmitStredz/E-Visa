@@ -6,10 +6,29 @@ import Footer from "../homepage/pages/footer";
 import img1 from "./assets/applyBanner.jpg";
 
 import TermsModal from "./termsModal";
+import axios from "axios";
 
 export default function Personal_info() {
+  const [firstName, setFirstName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [dob, setDob] = useState("");
+  const [placeOfBirth, setPlaceOfBirth] = useState("");
+  const [motherName, setMotherName] = useState("");
+  const [fatherName, setFatherName] = useState("");
+  const [passportNo, setPassportNo] = useState("");
+  const [passportIssueDate, setPassportIssueDate] = useState("");
+  const [passportExpiryDate, setPassportExpiryDate] = useState("");
+  const [supportingDocType, setSupportingDocType] = useState("");
+  const [supportingDocForm, setSupportingDocForm] = useState("");
+  const [supportingDocNo, setSupportingDocNo] = useState("");
+  const [supportingDocExpiryDate, setSupportingDocExpiryDate] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNo, setPhoneNo] = useState("");
+  const [address, setAddress] = useState("");
+
   const [showModal, setShowModal] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleCheckboxClick = () => {
@@ -23,6 +42,47 @@ export default function Personal_info() {
   const handleModalClose = () => {
     setShowModal(false);
     setIsChecked(!isChecked);
+  };
+
+  const handleNextClick = async () => {
+    if (isLoading) return; // Prevent multiple clicks
+    setIsLoading(true);
+
+    const data = {
+      first_name: firstName,
+      surname: surname,
+      date_of_birth: dob,
+      place_of_birth: placeOfBirth,
+      mothers_name: motherName,
+      fathers_name: fatherName,
+      passport_number: passportNo,
+      passport_issue_date: passportIssueDate,
+      passport_expiry_date: passportExpiryDate,
+      supporting_doc_type: supportingDocType,
+      supporting_doc_form: supportingDocForm,
+      supporting_doc_no: supportingDocNo,
+      supporting_doc_expiry_date: supportingDocExpiryDate,
+      email: email,
+      phone_number: phoneNo,
+      address: address,
+      accept_terms: true,
+    };
+
+    console.log("PersonalInfo: ", data);
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/visa-applications/",
+        data
+      );
+
+      navigate("/prerequisites");
+    } catch (error) {
+      setIsLoading(false);
+      console.error("There was an error!", error);
+      alert("Error:" + (error.response?.data || error.message));
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -60,6 +120,8 @@ export default function Personal_info() {
                 Given/First Name(s)
               </label>
               <input
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
                 required
                 className="border-2 border-slate-400 h-8 w-3/5"
               ></input>
@@ -72,6 +134,8 @@ export default function Personal_info() {
                 Surname(s)
               </label>
               <input
+                value={surname}
+                onChange={(e) => setSurname(e.target.value)}
                 required
                 className="border-2 border-slate-400 h-8 w-3/5"
               ></input>
@@ -84,6 +148,8 @@ export default function Personal_info() {
                 Date of Birth
               </label>
               <input
+                value={dob}
+                onChange={(e) => setDob(e.target.value)}
                 required
                 className="border-2 border-slate-400 h-8"
                 type="date"
@@ -97,6 +163,8 @@ export default function Personal_info() {
                 Place of Birth
               </label>
               <input
+                value={placeOfBirth}
+                onChange={(e) => setPlaceOfBirth(e.target.value)}
                 required
                 className="border-2 border-slate-400 h-8 w-3/5"
               ></input>
@@ -109,6 +177,8 @@ export default function Personal_info() {
                 Mother's Name
               </label>
               <input
+                value={motherName}
+                onChange={(e) => setMotherName(e.target.value)}
                 required
                 className="border-2 border-slate-400 h-8 w-3/5"
               ></input>
@@ -121,6 +191,8 @@ export default function Personal_info() {
                 Father's Name
               </label>
               <input
+                value={fatherName}
+                onChange={(e) => setFatherName(e.target.value)}
                 required
                 className="border-2 border-slate-400 h-8 w-3/5"
               ></input>
@@ -133,6 +205,8 @@ export default function Personal_info() {
                 Passport Number
               </label>
               <input
+                value={passportNo}
+                onChange={(e) => setPassportNo(e.target.value)}
                 required
                 className="border-2 border-slate-400 h-8 w-3/5"
               ></input>
@@ -145,6 +219,8 @@ export default function Personal_info() {
                 Passport Issue Date
               </label>
               <input
+                value={passportIssueDate}
+                onChange={(e) => setPassportIssueDate(e.target.value)}
                 required
                 className="border-2 border-slate-400 h-8"
                 type="date"
@@ -158,12 +234,14 @@ export default function Personal_info() {
                 Passport Expiry Date
               </label>
               <input
+                value={passportExpiryDate}
+                onChange={(e) => setPassportExpiryDate(e.target.value)}
                 required
                 className="border-2 border-slate-400 h-8"
                 type="date"
               ></input>
             </div>
-            <div class="flex gap-3 items-center justify-between w-full">
+            {/* <div class="flex gap-3 items-center justify-between w-full">
               <label
                 for="visa-type"
                 class="block text-[16px] font-semibold w-2/5"
@@ -171,11 +249,13 @@ export default function Personal_info() {
                 Passport Expiry Date
               </label>
               <input
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
                 required
                 className="border-2 border-slate-400 h-8 w-3/5"
                 type="date"
               ></input>
-            </div>
+            </div> */}
             <div class="flex gap-3 items-center justify-between w-full">
               <label
                 for="visa-type"
@@ -183,7 +263,11 @@ export default function Personal_info() {
               >
                 Type of Supporting Doc.
               </label>
-              <select className="border-2 border-slate-400 h-8 w-3/5">
+              <select
+                className="border-2 border-slate-400 h-8 w-3/5"
+                value={supportingDocType}
+                onChange={(e) => setSupportingDocType(e.target.value)}
+              >
                 <option>Visa</option>
                 <option>Residence Permit</option>
               </select>
@@ -195,7 +279,11 @@ export default function Personal_info() {
               >
                 Supporting Doc. Form
               </label>
-              <select className="border-2 border-slate-400 h-8 w-3/5 transition-all">
+              <select
+                className="border-2 border-slate-400 h-8 w-3/5 transition-all"
+                value={supportingDocForm}
+                onChange={(e) => setSupportingDocForm(e.target.value)}
+              >
                 <option>Ireland</option>
                 <option>Schengen</option>
                 <option>U.S.A</option>
@@ -210,6 +298,8 @@ export default function Personal_info() {
                 Supporting Doc. No
               </label>
               <input
+                value={supportingDocNo}
+                onChange={(e) => setSupportingDocNo(e.target.value)}
                 required
                 className="border-2 border-slate-400 h-8 w-3/5"
               ></input>
@@ -222,6 +312,8 @@ export default function Personal_info() {
                 Supp. Doc. Expiry Date
               </label>
               <input
+                value={supportingDocExpiryDate}
+                onChange={(e) => setSupportingDocExpiryDate(e.target.value)}
                 required
                 className="border-2 border-slate-400 h-8"
                 type="date"
@@ -235,6 +327,8 @@ export default function Personal_info() {
                 E-mail address
               </label>
               <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
                 className="border-2 border-slate-400 h-8 w-3/5"
               ></input>
@@ -247,6 +341,8 @@ export default function Personal_info() {
                 Phone Number
               </label>
               <input
+                value={phoneNo}
+                onChange={(e) => setPhoneNo(e.target.value)}
                 required
                 className="border-2 border-slate-400 h-8 w-3/5"
               ></input>
@@ -259,6 +355,8 @@ export default function Personal_info() {
                 Address
               </label>
               <input
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
                 required
                 className="border-2 border-slate-400 h-8 w-3/5"
               ></input>
@@ -289,7 +387,7 @@ export default function Personal_info() {
                 Add a new Person
               </button>
               <button
-                  onClick={()=> navigate('/email')}
+                onClick={handleNextClick}
                 disabled={!isChecked}
                 type="submit"
                 name="save-continue"
@@ -297,8 +395,8 @@ export default function Personal_info() {
                   isChecked ? "hover:bg-green-700" : "bg-gray-500 bg-opacity-40"
                 }`}
               >
-                Save and Continue
-              </button>
+                {isLoading ? "Loading..." : "Save and Continue"}
+                </button>
             </div>
           </form>
 

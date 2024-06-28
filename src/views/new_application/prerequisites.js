@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router";
+import { Await, useNavigate } from "react-router";
+import axios from "axios";
 
 import Header from "../homepage/pages/header";
 import Footer from "../homepage/pages/footer";
 import img1 from "./assets/applyBanner.jpg";
 
 export default function Prerequisites() {
+  const [prerequisitesCheck, setPrerequisitesCheck] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const [checks, setChecks] = useState({
@@ -26,6 +30,29 @@ export default function Prerequisites() {
 
   const allChecked = Object.values(checks).every(Boolean);
 
+  useEffect(() => {
+    setPrerequisitesCheck(allChecked);
+  });
+
+
+  const handleNextClick = async () => {
+    if(isLoading) return;  //prevents from multiple clicks
+    setIsLoading(true);
+
+    if (allChecked){
+      try{
+        const response = await axios.post("http://localhost:8000/api/visa-applications/", {
+          prerequisites_check : true
+        });
+        navigate('/personalinfo');
+      }catch(error){
+        console.log("Error Occured...");
+        alert("Error:" + (error.response?.data || error.message));
+      }finally{
+        setIsLoading(false);
+      }
+    }
+  }
   return (
     <div className="overflow-hidden text-black relative">
       <Header></Header>
@@ -115,16 +142,15 @@ export default function Prerequisites() {
             </label>
           </div>
 
-          {allChecked && (
-            <div className="flex justify-center w-[50rem]">
-              <button
-                className=" bg-blue-500 text-white p-2 px-10 rounded"
-                onClick={() => navigate('/personalinfo')}
-              >
-                Save and Continue
-              </button>
-            </div>
-          )}
+          <div className="flex justify-center w-[50rem]">
+            <button
+              disabled={!allChecked}
+              className= {`bg-blue-500 text-white p-2 px-10 rounded ${allChecked ? "" : "bg-blue-300"}`}
+              onClick={handleNextClick}
+            >
+                {isLoading ? "Loading..." : "Save and Continue"}
+                </button>
+          </div>
         </div>
       </div>
 

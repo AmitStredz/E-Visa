@@ -5,18 +5,22 @@ import Header from "../homepage/pages/header";
 import Footer from "../homepage/pages/footer";
 import img1 from "./assets/applyBanner.jpg";
 import calendar from "./assets/calendarImg.jpg";
+import axios from "axios";
 
 export default function Arrivaldate() {
-  const [selectedDate, setSelectedDate] = useState();
-  const [futureDate, setFutureDate] = useState("");
-  const [formattedToday, setFormattedToday] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [arrivalDate, setArrivalDate] = useState(""); //date which user selects/arrives
+  const [futureDate, setFutureDate] = useState(""); //date after 180 days
+  const [formattedToday, setFormattedToday] = useState(""); //formatted date for sending to API to show in input field.
 
   const navigate = useNavigate();
+
   useEffect(() => {
     const today = new Date();
     const formattedDate = today.toISOString().split("T")[0];
     setFormattedToday(formattedDate);
-    setSelectedDate(today.toDateString());
+    setArrivalDate(today.toDateString());
 
     const future = new Date(today);
     future.setDate(future.getDate() + 180);
@@ -25,12 +29,37 @@ export default function Arrivaldate() {
 
   const handleDateChange = (event) => {
     const inputDate = new Date(event.target.value);
-    setSelectedDate(inputDate.toDateString());
+    setArrivalDate(inputDate.toDateString());
     setFormattedToday(inputDate.toISOString().split("T")[0]);
 
     const future = new Date(inputDate);
     future.setDate(future.getDate() + 180);
     setFutureDate(future.toDateString());
+  };
+
+  const handleNextClick = async () => {
+    if (isLoading) return; // Prevent multiple clicks
+    setIsLoading(true);
+
+    const data = {
+      arrival_date: formattedToday,
+    };
+
+    console.log("ArrivalDate: ", data);
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/visa-applications/",
+        data
+      );
+
+      navigate('/prerequisites');
+    } catch (error) {
+      setIsLoading(false);
+      console.error("There was an error!", error);
+      alert("Error:" + (error.response?.data || error.message));
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -66,7 +95,7 @@ export default function Arrivaldate() {
               <i class="ri-information-line"></i>
               <p>
                 Your e- visa is valid from{" "}
-                <span className="underline">{selectedDate}</span> to{" "}
+                <span className="underline">{arrivalDate}</span> to{" "}
                 <span className="underline">{futureDate}</span> for a total
                 period of 180 days. Your stay cannot exceed 30 days.
               </p>
@@ -76,7 +105,7 @@ export default function Arrivaldate() {
               <div className="relative">
                 <img src={calendar} className="w-24"></img>
                 <p className="absolute top-10 left-5 w-16 text-[14px] font-semibold">
-                  {selectedDate}
+                  {arrivalDate}
                 </p>
               </div>
               <div className="w-32 bg-slate-600 h-[2px]"></div>
@@ -116,12 +145,12 @@ export default function Arrivaldate() {
             </div>
             <div className="flex justify-center">
               <button
-                onClick={() => navigate("/prerequisites")}
+                onClick={handleNextClick}
                 type="submit"
                 name="save-continue"
                 class="w-44 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
               >
-                Save and Continue
+                {isLoading ? "Loading..." : "Save and Continue"}
               </button>
             </div>
           </div>

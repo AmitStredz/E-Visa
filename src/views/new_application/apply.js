@@ -30,7 +30,7 @@ export default function Apply() {
       // console.log("Value: ", value.label);
     };
 
-    return <Select options={options} value={value} onChange={changeHandler} />;
+    return <Select options={options} value={value} onChange={changeHandler} required />;
   }
 
   const handleNextClick = async () => {
@@ -54,7 +54,7 @@ export default function Apply() {
     } catch (error) {
       setIsLoading(false);
       console.error("There was an error!", error);
-      alert("Error:" + (error.response?.data || error.message));
+      // alert("Error:" + (error.response?.data || error.message));
     } finally {
       setIsLoading(false);
     }
@@ -84,6 +84,7 @@ export default function Apply() {
               </label>
               <select
                 value={visaType}
+                required
                 onChange={(e) => setVisaType(e.target.value)}
                 id="visa-type"
                 name="visa-type"
@@ -129,6 +130,7 @@ export default function Apply() {
               <select
                 value={travelDoc}
                 onChange={(e) => setTravelDoc(e.target.value)}
+                required
                 id="travel-document"
                 name="travel-document"
                 className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm cursor-pointer"
@@ -217,7 +219,7 @@ export default function Apply() {
           </div>
 
           <div
-            className="absolute right-10 top-[54rem] mt-6 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4"
+            className="absolute right-10 top-[52rem] mt-6 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4"
             // role="alert"
           >
             <p className="font-bold">Important Notes:</p>

@@ -5,6 +5,7 @@ import axios from "axios";
 import Header from "../homepage/pages/header";
 import Footer from "../homepage/pages/footer";
 import img1 from "./assets/applyBanner.jpg";
+import { Cookies } from "react-cookie";
 
 export default function Prerequisites() {
   const [prerequisitesCheck, setPrerequisitesCheck] = useState(false);
@@ -39,20 +40,23 @@ export default function Prerequisites() {
     setIsLoading(true);
 
     if (allChecked) {
-      try {
-        const response = await axios.post(
-          "http://localhost:8000/api/visa-applications/",
-          {
-            prerequisites_check: true,
-          }
-        );
-        navigate("/personalinfo");
-      } catch (error) {
-        console.log("Error Occured...");
-        alert("Error:" + (error.response?.data || error.message));
-      } finally {
-        setIsLoading(false);
-      }
+      localStorage.setItem("prerequisites_check", true);
+      navigate("/personalinfo");
+
+      // try {
+      //   const response = await axios.post(
+      //     "http://localhost:8000/api/visa-applications/",
+      //     {
+      //       prerequisites_check: true,
+      //     }
+      //   );
+      //   navigate("/personalinfo");
+      // } catch (error) {
+      //   console.log("Error Occured...");
+      //   alert("Error:" + (error.response?.data || error.message));
+      // } finally {
+      //   setIsLoading(false);
+      // }
     }
   };
   return (

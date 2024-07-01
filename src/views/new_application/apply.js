@@ -2,6 +2,7 @@ import React, { useState, useMemo } from "react";
 import Select from "react-select";
 import countryList from "react-select-country-list";
 import { useNavigate } from "react-router";
+import { Cookies } from "react-cookie";
 
 import ReCAPTCHA from "react-google-recaptcha";
 
@@ -33,31 +34,33 @@ export default function Apply() {
     return <Select options={options} value={value} onChange={changeHandler} required />;
   }
 
-  const handleNextClick = async () => {
-    if (isLoading) return; // Prevent multiple clicks
-    setIsLoading(true);
+  const handleNextClick = () => {
+    // if (isLoading) return; // Prevent multiple clicks
+    // setIsLoading(true);
 
-    const data = {
-      visa_type: visaType,
-      country_region: countryRegion,
-      travel_document: travelDoc,
-    };
 
-    console.log("Apply: ", data);
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/api/visa-applications/",
-        data
-      );
+    localStorage.setItem("visa_type", visaType);
+    localStorage.setItem("country_region", countryRegion);
+    localStorage.setItem("travel_document", travelDoc);
 
-      navigate("/arrivalDate");
-    } catch (error) {
-      setIsLoading(false);
-      console.error("There was an error!", error);
-      // alert("Error:" + (error.response?.data || error.message));
-    } finally {
-      setIsLoading(false);
-    }
+    navigate('/arrivalDate');
+
+    // console.log("Apply: ", data);
+
+    // try {
+    //   const response = await axios.post(
+    //     "https://evisa-6a188817e8b4.herokuapp.com/api/visa-applications/",
+    //     data
+    //   );
+
+    //   navigate("/arrivalDate");
+    // } catch (error) {
+    //   setIsLoading(false);
+    //   console.error("There was an error!", error);
+    //   // alert("Error:" + (error.response?.data || error.message));
+    // } finally {
+    //   setIsLoading(false);
+    // }
   };
 
   return (

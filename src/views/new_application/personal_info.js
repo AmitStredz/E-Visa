@@ -7,6 +7,7 @@ import img1 from "./assets/applyBanner.jpg";
 
 import TermsModal from "./termsModal";
 import axios from "axios";
+import { Cookies } from "react-cookie";
 
 export default function Personal_info() {
   const [firstName, setFirstName] = useState("");
@@ -44,6 +45,12 @@ export default function Personal_info() {
     setIsChecked(!isChecked);
   };
 
+  console.log("VisaType: ", localStorage.getItem("visa_type"),);
+  console.log("country_region: ", localStorage.getItem("country_region"),);
+  console.log("travel_document: ", localStorage.getItem("travel_document"),);
+  console.log("arrival_date: ", localStorage.getItem("arrival_date"),);
+  console.log("prerequisites_check: ", localStorage.getItem("prerequisites_check"),);
+  
   const handleNextClick = async () => {
     if (isLoading) return; // Prevent multiple clicks
     setIsLoading(true);
@@ -66,20 +73,27 @@ export default function Personal_info() {
       phone_number: phoneNo,
       address: address,
       accept_terms: true,
+      visa_type: localStorage.getItem("visa_type"),
+      country_region: localStorage.getItem("country_region"),
+      travel_document: localStorage.getItem("travel_document"),
+      arrival_date: localStorage.getItem("arrival_date"),
+      prerequisites_check: localStorage.getItem("prerequisites_check"),
     };
 
-    console.log("PersonalInfo: ", data);
+    console.log("Data", data);
+
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/visa-applications/",
+        "https://evisa-6a188817e8b4.herokuapp.com/api/visa-applications/",
         data
       );
+      console.log("Response: ", response);
+      navigate("/email");
 
-      navigate("/prerequisites");
     } catch (error) {
       setIsLoading(false);
       console.error("There was an error!", error);
-      alert("Error:" + (error.response?.data || error.message));
+      alert("Error: " + (error.response?.data || error.message));
     } finally {
       setIsLoading(false);
     }
@@ -396,7 +410,7 @@ export default function Personal_info() {
                 }`}
               >
                 {isLoading ? "Loading..." : "Save and Continue"}
-                </button>
+              </button>
             </div>
           </form>
 

@@ -6,6 +6,7 @@ import Footer from "../homepage/pages/footer";
 import img1 from "./assets/applyBanner.jpg";
 import calendar from "./assets/calendarImg.jpg";
 import axios from "axios";
+import { Cookies } from "react-cookie";
 
 export default function Arrivaldate() {
   const [isLoading, setIsLoading] = useState(false);
@@ -41,25 +42,28 @@ export default function Arrivaldate() {
     if (isLoading) return; // Prevent multiple clicks
     setIsLoading(true);
 
-    const data = {
-      arrival_date: formattedToday,
-    };
+    localStorage.setItem("arrival_date", formattedToday);
 
-    console.log("ArrivalDate: ", data);
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/api/visa-applications/",
-        data
-      );
+    navigate('/prerequisites');
+    // const data = {
+    //   arrival_date: formattedToday,
+    // };
 
-      navigate('/prerequisites');
-    } catch (error) {
-      setIsLoading(false);
-      console.error("There was an error!", error);
-      alert("Error:" + (error.response?.data || error.message));
-    } finally {
-      setIsLoading(false);
-    }
+    // console.log("ArrivalDate: ", data);
+    // try {
+    //   const response = await axios.post(
+    //     "http://localhost:3000/api/visa-applications/",
+    //     data
+    //   );
+
+    //   navigate('/prerequisites');
+    // } catch (error) {
+    //   setIsLoading(false);
+    //   console.error("There was an error!", error);
+    //   alert("Error:" + (error.response?.data || error.message));
+    // } finally {
+    //   setIsLoading(false);
+    // }
   };
 
   return (

@@ -48,8 +48,32 @@ export default function Personal_info() {
   const handleNextClick = async (e) => {
     e.preventDefault();
     if (isLoading) return; // Prevent multiple clicks
+
+    // Validation
+    if (
+      !firstName ||
+      !surname ||
+      !dob ||
+      !placeOfBirth ||
+      !motherName ||
+      !fatherName ||
+      !passportNo ||
+      !passportIssueDate ||
+      !passportExpiryDate ||
+      !supportingDocType ||
+      !supportingDocForm ||
+      !supportingDocNo ||
+      !supportingDocExpiryDate ||
+      !email ||
+      !phoneNo ||
+      !address
+    ) {
+      alert("Please fill in all the required fields.");
+      return;
+    }
+
     setIsLoading(true);
-    
+
     console.log("VisaType: ", localStorage.getItem("visa_type"));
     console.log("country_region: ", localStorage.getItem("country_region"));
     console.log("travel_document: ", localStorage.getItem("travel_document"));
@@ -290,6 +314,9 @@ export default function Personal_info() {
                 value={supportingDocType}
                 onChange={(e) => setSupportingDocType(e.target.value)}
               >
+                <option value="" disabled selected>
+                  Select a Supporting Doc Type
+                </option>
                 <option>Visa</option>
                 <option>Residence Permit</option>
               </select>
@@ -305,7 +332,9 @@ export default function Personal_info() {
                 className="border-2 border-slate-400 h-8 w-3/5 transition-all"
                 value={supportingDocForm}
                 onChange={(e) => setSupportingDocForm(e.target.value)}
-              >
+              ><option value="" disabled selected>
+              Select a Supporting Doc Form
+            </option>
                 <option>Ireland</option>
                 <option>Schengen</option>
                 <option>U.S.A</option>
@@ -402,19 +431,23 @@ export default function Personal_info() {
                 disabled={!isChecked}
                 type="submit"
                 name="save-continue"
-                class={`w-5/12 py-4 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium bg-blue-600   ${
-                  isChecked ? "text-white hover:bg-blue-700" : "bg-blue-300"
+                class={`w-5/12 py-4 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium  ${
+                  isChecked
+                    ? "text-white bg-blue-600 hover:bg-blue-700"
+                    : "bg-blue-300"
                 }`}
               >
                 Add a new Person
               </button>
               <button
                 onClick={handleNextClick}
-                disabled={!isChecked}
+                disabled={!isChecked || isLoading}
                 type="submit"
                 name="save-continue"
-                class={`w-5/12 py-4 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium bg-green-600   ${
-                  isChecked ? "text-white hover:bg-green-700" : "bg-green-300"
+                class={`w-5/12 py-4 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium   ${
+                  (isChecked && !isLoading)
+                    ? "text-white bg-green-600  hover:bg-green-700"
+                    : "bg-green-300"
                 }`}
               >
                 {isLoading ? "Loading..." : "Save and Continue"}

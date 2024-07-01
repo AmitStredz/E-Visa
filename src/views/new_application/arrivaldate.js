@@ -45,25 +45,6 @@ export default function Arrivaldate() {
     localStorage.setItem("arrival_date", formattedToday);
 
     navigate('/prerequisites');
-    // const data = {
-    //   arrival_date: formattedToday,
-    // };
-
-    // console.log("ArrivalDate: ", data);
-    // try {
-    //   const response = await axios.post(
-    //     "http://localhost:3000/api/visa-applications/",
-    //     data
-    //   );
-
-    //   navigate('/prerequisites');
-    // } catch (error) {
-    //   setIsLoading(false);
-    //   console.error("There was an error!", error);
-    //   alert("Error:" + (error.response?.data || error.message));
-    // } finally {
-    //   setIsLoading(false);
-    // }
   };
 
   return (

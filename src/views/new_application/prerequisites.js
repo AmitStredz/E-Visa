@@ -43,20 +43,6 @@ export default function Prerequisites() {
       localStorage.setItem("prerequisites_check", true);
       navigate("/personalinfo");
 
-      // try {
-      //   const response = await axios.post(
-      //     "http://localhost:8000/api/visa-applications/",
-      //     {
-      //       prerequisites_check: true,
-      //     }
-      //   );
-      //   navigate("/personalinfo");
-      // } catch (error) {
-      //   console.log("Error Occured...");
-      //   alert("Error:" + (error.response?.data || error.message));
-      // } finally {
-      //   setIsLoading(false);
-      // }
     }
   };
   return (

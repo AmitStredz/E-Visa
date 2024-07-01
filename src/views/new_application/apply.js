@@ -35,9 +35,13 @@ export default function Apply() {
   }
 
   const handleNextClick = () => {
-    // if (isLoading) return; // Prevent multiple clicks
-    // setIsLoading(true);
+    if (isLoading) return; // Prevent multiple clicks
+    setIsLoading(true);
 
+    if(!visaType || !countryRegion || !travelDoc){
+      alert("Please fill in all the required fields.");
+      return;
+    }
 
     localStorage.setItem("visa_type", visaType);
     localStorage.setItem("country_region", countryRegion);
@@ -45,22 +49,6 @@ export default function Apply() {
 
     navigate('/arrivalDate');
 
-    // console.log("Apply: ", data);
-
-    // try {
-    //   const response = await axios.post(
-    //     "https://evisa-6a188817e8b4.herokuapp.com/api/visa-applications/",
-    //     data
-    //   );
-
-    //   navigate("/arrivalDate");
-    // } catch (error) {
-    //   setIsLoading(false);
-    //   console.error("There was an error!", error);
-    //   // alert("Error:" + (error.response?.data || error.message));
-    // } finally {
-    //   setIsLoading(false);
-    // }
   };
 
   return (

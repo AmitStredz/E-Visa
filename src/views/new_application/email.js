@@ -5,8 +5,6 @@ import Header from "../homepage/pages/header";
 import Footer from "../homepage/pages/footer";
 import img1 from "./assets/applyBanner.jpg";
 
-import TermsModal from "./termsModal";
-
 export default function Personal_info() {
   const [mailSent, setMailSent] = useState(false);
   const navigate = useNavigate();

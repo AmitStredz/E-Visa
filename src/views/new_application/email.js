@@ -42,11 +42,11 @@ export default function Personal_info() {
               an e-mail message, click the button below to resend.
             </p>
             {mailSent ? (
-              <div className="text-center text-[24px] font-semibold text-green-600">
+              <div className="text-center text-[24px] font-semibold text-green-600 h-14">
                 <p data-aos="fade-in">Email Sent Succesfully...</p>
               </div>
             ) : (
-              <div className="flex justify-center">
+              <div className="flex justify-center h-14">
                 <button
                   className=" w-5/12 py-4 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium bg-blue-600 hover:bg-blue-700 text-white"
                   data-aos="fade-in"

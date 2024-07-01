@@ -45,15 +45,19 @@ export default function Personal_info() {
     setIsChecked(!isChecked);
   };
 
-  console.log("VisaType: ", localStorage.getItem("visa_type"),);
-  console.log("country_region: ", localStorage.getItem("country_region"),);
-  console.log("travel_document: ", localStorage.getItem("travel_document"),);
-  console.log("arrival_date: ", localStorage.getItem("arrival_date"),);
-  console.log("prerequisites_check: ", localStorage.getItem("prerequisites_check"),);
-  
-  const handleNextClick = async () => {
+  const handleNextClick = async (e) => {
+    e.preventDefault();
     if (isLoading) return; // Prevent multiple clicks
     setIsLoading(true);
+    
+    console.log("VisaType: ", localStorage.getItem("visa_type"));
+    console.log("country_region: ", localStorage.getItem("country_region"));
+    console.log("travel_document: ", localStorage.getItem("travel_document"));
+    console.log("arrival_date: ", localStorage.getItem("arrival_date"));
+    console.log(
+      "prerequisites_check: ",
+      localStorage.getItem("prerequisites_check")
+    );
 
     const data = {
       first_name: firstName,
@@ -85,11 +89,15 @@ export default function Personal_info() {
     try {
       const response = await axios.post(
         "https://evisa-6a188817e8b4.herokuapp.com/api/visa-applications/",
-        data
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
       console.log("Response: ", response);
       navigate("/email");
-
     } catch (error) {
       setIsLoading(false);
       console.error("There was an error!", error);

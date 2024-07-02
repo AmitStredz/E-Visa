@@ -84,8 +84,8 @@ export default function Apply() {
                 <option value="" disabled selected>
                   Select a Visa type
                 </option>
-                <option value="electronic-visa">Electronic Visa</option>
-                <option value="airport-transit-visa">
+                <option value="Electronic Visa">Electronic Visa</option>
+                <option value="Airport Transit Visa">
                   Airport Transit Visa
                 </option>
               </select>
@@ -129,15 +129,15 @@ export default function Apply() {
                 <option value="" disabled selected>
                   Select a Travel Document type
                 </option>
-                <option value="ordinary-passport">Ordinary Passport</option>
-                <option value="identity-card">Identity Card</option>
-                <option value="diplomatic-passport">Diplomatic Passport</option>
-                <option value="diplomatic-passport">Service Passport</option>
-                <option value="diplomatic-passport">Special Passport</option>
-                <option value="diplomatic-passport">Alien's Passport</option>
-                <option value="diplomatic-passport">Travel Document</option>
-                <option value="diplomatic-passport">Nansen Passport</option>
-                <option value="diplomatic-passport">Others</option>
+                <option value="Ordinary Passport">Ordinary Passport</option>
+                <option value="Identity Card">Identity Card</option>
+                <option value="Diplomatic Passport">Diplomatic Passport</option>
+                <option value="Service Passport">Service Passport</option>
+                <option value="Special Passport">Special Passport</option>
+                <option value="Alien's Passport">Alien's Passport</option>
+                <option value="Travel Document">Travel Document</option>
+                <option value="Nansen Passport">Nansen Passport</option>
+                <option value="Others">Others</option>
               </select>
             </div>
             {/* <!-- Security Verification --> */}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
 import Header from "../homepage/pages/header";
@@ -27,6 +27,8 @@ export default function Personal_info() {
   const [phoneNo, setPhoneNo] = useState("");
   const [address, setAddress] = useState("");
 
+  const [isFormValid, setIsFormValid] = useState(false); //to check e-mail validity.
+
   const [showModal, setShowModal] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -44,6 +46,18 @@ export default function Personal_info() {
     setShowModal(false);
     setIsChecked(!isChecked);
   };
+
+  useEffect(() => {
+    const validateForm = () => {
+      // const phoneRegex = /^[0-9]{10}$/;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      // const isNameValid = fullName.trim() !== "";
+
+      setIsFormValid(emailRegex.test(email));
+    };
+
+    validateForm();
+  }, [email]);
 
   const handleNextClick = async (e) => {
     e.preventDefault();
@@ -71,17 +85,22 @@ export default function Personal_info() {
       alert("Please fill in all the required fields.");
       return;
     }
-
+    
+    if (!isFormValid) {
+      alert("Invalid e-mail. Please Enter a valid email Address.");
+      return;
+    }
+    
     setIsLoading(true);
 
-    console.log("VisaType: ", localStorage.getItem("visa_type"));
-    console.log("country_region: ", localStorage.getItem("country_region"));
-    console.log("travel_document: ", localStorage.getItem("travel_document"));
-    console.log("arrival_date: ", localStorage.getItem("arrival_date"));
-    console.log(
-      "prerequisites_check: ",
-      localStorage.getItem("prerequisites_check")
-    );
+    // console.log("VisaType: ", localStorage.getItem("visa_type"));
+    // console.log("country_region: ", localStorage.getItem("country_region"));
+    // console.log("travel_document: ", localStorage.getItem("travel_document"));
+    // console.log("arrival_date: ", localStorage.getItem("arrival_date"));
+    // console.log(
+    //   "prerequisites_check: ",
+    //   localStorage.getItem("prerequisites_check")
+    // );
 
     const data = {
       first_name: firstName,
@@ -105,7 +124,30 @@ export default function Personal_info() {
       country_region: localStorage.getItem("country_region"),
       travel_document: localStorage.getItem("travel_document"),
       arrival_date: localStorage.getItem("arrival_date"),
-      prerequisites_check: localStorage.getItem("prerequisites_check"),
+      prerequisites_check: true,
+
+      // visa_type : "Electronic visa",
+      // country_region : "Ireland",
+      // travel_document : "Passport",
+      // arrival_date : "2024-07-01",
+      // prerequisites_check : true,
+      // first_name : "www",
+      // surname : "we",
+      // date_of_birth : "1990-01-01",
+      // place_of_birth : "www",
+      // mothers_name : "wwww",
+      // fathers_name : "wwww",
+      // passport_number : "22222",
+      // passport_issue_date : "2014-07-01",
+      // passport_expiry_date : "2024-07-01",
+      // supporting_doc_type : "visa",
+      // // supporting_doc_form : "ireland",
+      // supporting_doc_no : "22222",
+      // supporting_doc_expiry_date : "2024-07-31",
+      // email : "eee@er.joeeee",
+      // phone_number : "12222",
+      // address : "heloom",
+      // accept_terms : true
     };
 
     console.log("Data", data);
@@ -125,7 +167,10 @@ export default function Personal_info() {
     } catch (error) {
       setIsLoading(false);
       console.error("There was an error!", error);
-      alert("Error: " + (error.response?.data || error.message));
+      alert(
+        "There was some Network Error: " +
+          (error.response?.data || error.message)
+      );
     } finally {
       setIsLoading(false);
     }
@@ -332,9 +377,10 @@ export default function Personal_info() {
                 className="border-2 border-slate-400 h-8 w-3/5 transition-all"
                 value={supportingDocForm}
                 onChange={(e) => setSupportingDocForm(e.target.value)}
-              ><option value="" disabled selected>
-              Select a Supporting Doc Form
-            </option>
+              >
+                <option value="" disabled selected>
+                  Select a Supporting Doc Form
+                </option>
                 <option>Ireland</option>
                 <option>Schengen</option>
                 <option>U.S.A</option>
@@ -445,7 +491,7 @@ export default function Personal_info() {
                 type="submit"
                 name="save-continue"
                 class={`w-5/12 py-4 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium   ${
-                  (isChecked && !isLoading)
+                  isChecked && !isLoading
                     ? "text-white bg-green-600  hover:bg-green-700"
                     : "bg-green-300"
                 }`}

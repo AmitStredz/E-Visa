@@ -12,7 +12,7 @@ export default function DataControl() {
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log("useId", userId);
+  console.log("userId", userId);
 
   useEffect(() => {
     const stored_userId = localStorage.getItem("user_id");
@@ -24,14 +24,14 @@ export default function DataControl() {
         console.log("UserId confirmed...");
         setIsConfirmed(true);
         setIsLoading(false);
-        navigate("");
+        navigate("/payment");
       } else {
         console.log("UserId not confirmed...");
         setIsConfirmed(false);
         setIsLoading(false);
       }
     }
-  }, [userId]);
+  }, []);
 
   return (
     <div className="overflow-hidden text-black bg-slate-600 bg-opacity-20 relative">

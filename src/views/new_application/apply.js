@@ -40,6 +40,7 @@ export default function Apply() {
 
     if(!visaType || !countryRegion || !travelDoc){
       alert("Please fill in all the required fields.");
+      setIsLoading(false);
       return;
     }
 

@@ -85,12 +85,12 @@ export default function Personal_info() {
       alert("Please fill in all the required fields.");
       return;
     }
-    
+
     if (!isFormValid) {
       alert("Invalid e-mail. Please Enter a valid email Address.");
       return;
     }
-    
+
     setIsLoading(true);
 
     // console.log("VisaType: ", localStorage.getItem("visa_type"));
@@ -163,6 +163,11 @@ export default function Personal_info() {
         }
       );
       console.log("Response: ", response);
+
+      if (response) {
+        console.log("UserId: ", response.data.user_id);
+        localStorage.setItem("user_id", response.data.user_id);
+      }
       navigate("/email");
     } catch (error) {
       setIsLoading(false);

@@ -22,7 +22,7 @@ const App = () => {
         <Route path="/personalinfo" element={<Personal_info />} />
         <Route path="/email" element={<Email />} />
         <Route
-          path="/notifications/confirmemail/:userId"
+          path="/notifications/confirm/:userId"
           element={<ConfirmEmail />}
         />
         <Route path="/payment" element={<Payment />} />

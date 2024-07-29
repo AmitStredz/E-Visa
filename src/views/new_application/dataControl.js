@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router";
 import Header from "../homepage/pages/header";
 import Footer from "../homepage/pages/footer";
 import img1 from "./assets/applyBanner.jpg";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function DataControl() {
   let { userId } = useParams();
@@ -61,6 +62,18 @@ export default function DataControl() {
               <p className="font-semibold">Data Control</p>
             </div>
             <h1 className="text-[28px] font-semibold ">
+              {(isLoading || isConfirmed) && (
+                <ThreeDots
+                  visible={true}
+                  height="80"
+                  width="80"
+                  color="#4fa94d"
+                  radius="9"
+                  ariaLabel="three-dots-loading"
+                  wrapperStyle={{}}
+                  wrapperClass=""
+                />
+              )}
               {isLoading
                 ? "Verifying your data. Please wait..."
                 : `${

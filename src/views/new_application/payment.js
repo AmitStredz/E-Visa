@@ -196,7 +196,7 @@ export default function Payment() {
                     <img src="/assets/AlipayLogo.svg" className="w-20 object-contain"></img>
                   </div>
                 </div>
-                <div className="bg-white p-5 object-contain">
+                <div className="bg-white p-5 object-contain border border-slate-400">
                   <form
                     className="flex flex-col gap-3"
                     // onSubmit={handlePaymentClick}

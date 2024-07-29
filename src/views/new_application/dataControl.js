@@ -24,7 +24,9 @@ export default function DataControl() {
         console.log("UserId confirmed...");
         setIsConfirmed(true);
         setIsLoading(false);
-        navigate("/payment");
+        setTimeout(() => {
+          navigate("/payment");
+        }, "2000");
       } else {
         console.log("UserId not confirmed...");
         setIsConfirmed(false);
@@ -59,7 +61,13 @@ export default function DataControl() {
               <p className="font-semibold">Data Control</p>
             </div>
             <h1 className="text-[28px] font-semibold ">
-                {isLoading? "Verifying your data. Please wait..." : `${isConfirmed? "Your data has been verified. Redirecting..." : "Your data is not verified. Please try again later."}`}
+              {isLoading
+                ? "Verifying your data. Please wait..."
+                : `${
+                    isConfirmed
+                      ? "Your data has been verified. Redirecting..."
+                      : "Your data is not verified. Please try again later."
+                  }`}
             </h1>
             {/* <span>wewe</span> */}
           </div>

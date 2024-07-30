@@ -13,7 +13,7 @@ export default function Personal_info() {
     setMailSent(true);
     setTimeout(() => {
       setMailSent(false);
-      navigate('/payment');
+      // navigate('/payment');
     }, "4000");
   };
 

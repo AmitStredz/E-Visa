@@ -42,35 +42,47 @@ export default function Payment() {
   };
 
   const handleExpDateChange = (e) => {
-    const value = e.target.value;
-    const cleanValue = value?.match(/\d+/g)?.join("");
+    let input = e.target.value;
+     // Remove all non-digit characters
+     input = input.replace(/\D/g, '');
 
-    // console.log("value: ", value);
-    // console.log("cleanvalue: ", cleanValue);
+     // Insert slash after MM
+     if (input.length > 2) {
+         input = input.slice(0, 2) + '/' + input.slice(2, 6);
+     }
 
-    if (value?.length > 7) {
-      return;
-    }
-
-    if (!isNaN(value) && value?.length < 2) {
-      setExpDate(cleanValue);
-      return;
-    }
-
-    if (value?.length == 2) {
-      // console.log("1");
-      setExpDate(value + "/");
-      return;
-    }
-
-    if (cleanValue?.length <= 6) {
-      // console.log("sliced: ", cleanValue.slice(0, 2), cleanValue.slice(2));
-      setExpDate(
-        cleanValue.slice(0, 2) + "/" + cleanValue.slice(2, cleanValue.length)
-      );
-      return;
-    }
+    setExpDate(input);
   };
+  // const handleExpDateChange = (e) => {
+  //   const value = e.target.value;
+  //   const cleanValue = value?.match(/\d+/g)?.join("");
+
+  //   // console.log("value: ", value);
+  //   // console.log("cleanvalue: ", cleanValue);
+
+  //   if (value?.length > 7) {
+  //     return;
+  //   }
+
+  //   if (!isNaN(value) && value?.length < 2) {
+  //     setExpDate(cleanValue);
+  //     return;
+  //   }
+
+  //   if (value?.length == 2) {
+  //     // console.log("1");
+  //     setExpDate(value + "/");
+  //     return;
+  //   }
+
+  //   if (cleanValue?.length <= 6) {
+  //     // console.log("sliced: ", cleanValue.slice(0, 2), cleanValue.slice(2));
+  //     setExpDate(
+  //       cleanValue.slice(0, 2) + "/" + cleanValue.slice(2, cleanValue.length)
+  //     );
+  //     return;
+  //   }
+  // };
 
   const generateRandomNumber = (length) => {
     let randomNumber = "";
@@ -95,7 +107,7 @@ export default function Payment() {
     if (isLoading) return;
     setIsLoading(true);
 
-    if (cardNumber.replace(/-/g, '').length != 16) {
+    if (cardNumber.replace(/-/g, "").length != 16) {
       alert("Enter valid Card number.");
       setIsLoading(false);
       return;
@@ -121,7 +133,7 @@ export default function Payment() {
       amount: "44",
       currency: "USD",
       order_id: orderId,
-      card_number: cardNumber.replace(/-/g, ''),
+      card_number: cardNumber.replace(/-/g, ""),
       card_expiry: expDate,
       cvv: cvv,
     };

@@ -79,9 +79,10 @@ export default function Payment() {
     const part1 = generateRandomNumber(3);
     const part2 = generateRandomNumber(3);
     const part3 = generateRandomNumber(3);
-    const part4 = generateRandomNumber(4);
+    const part4 = generateRandomNumber(3);
+    const part5 = generateRandomNumber(4);
 
-    return `${part1}-${part2}-${part3}-${part4}`;
+    return `${part1}-${part2}-${part3}-${part4}-${part5}`;
   };
 
   const handlePaymentClick = async () => {
@@ -100,22 +101,24 @@ export default function Payment() {
     }
 
     const userid = localStorage.getItem("user_id");
+    console.log("UserId:", userid);
     if (!userid) {
       console.log("UserId not found");
       setIsLoading(false);
-      //   return;
+      return;
     }
 
     const orderId = generateOrderId();
 
     const data = {
-      amount: "44.50",
+      amount: "44",
       currency: "USD",
       order_id: orderId,
       card_number: cardNumber,
       card_expiry: expDate,
       cvv: cvv,
     };
+
     console.log("data: ", data);
     console.log(
       "link: " +
@@ -128,11 +131,26 @@ export default function Payment() {
         data
       );
 
-      if (response.data) {
-        console.log("Response recieved: ", response);
+      console.log("Response: ", response);
+
+      if (response?.data?.payment_details) {
+        localStorage.setItem("status", response?.data.payment_details?.status);
+        localStorage.setItem("txn_id", response?.data.payment_details?.txn_id);
+        // localStorage.setItem("amount", response.payment_details.txn_id);
+        console.log("status: ", response?.data?.payment_details?.status);
+        console.log("txn_id: ", response?.data?.payment_details?.txn_id);
+
+        navigate("/payment2");
       }
     } catch (error) {
       console.log("Error: ", error);
+      if (error?.response) {
+        console.log("Error Data: ", error.response.data);
+        console.log("Error Status: ", error.response.status);
+        console.log("Error Headers: ", error.response.headers);
+      } else {
+        console.log("Error Message: ", error.message);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -183,7 +201,10 @@ export default function Payment() {
                 <div className="flex justify-between p-3 border border-slate-400 bg-[#e4e2e2]">
                   <span className="text-[18px]">Credit Card</span>
                   <div className="flex justify-center gap-1">
-                    <img src="/assets/visaLogo.png" className="w-12 object-contain"></img>
+                    <img
+                      src="/assets/visaLogo.png"
+                      className="w-12 object-contain"
+                    ></img>
                     <img
                       src="/assets/masterCardLogo.png"
                       className="w-12 h-8 object-contain"
@@ -193,63 +214,69 @@ export default function Payment() {
                       src="/assets/UnionPayLogo.png"
                       className="w-12 h-8 object-contain"
                     ></img>
-                    <img src="/assets/AlipayLogo.svg" className="w-20 object-contain"></img>
+                    <img
+                      src="/assets/AlipayLogo.svg"
+                      className="w-20 object-contain"
+                    ></img>
                   </div>
                 </div>
                 <div className="bg-white p-5 object-contain border border-slate-400">
-                  <form
+                  {/* <form
                     className="flex flex-col gap-3"
                     // onSubmit={handlePaymentClick}
-                  >
-                    <div className="flex justify-between items-center w-[70%]">
-                      <label>Card Number</label>
-                      <div className="flex justify-start w-1/2">
-                        <input
-                          type="text"
-                          placeholder="XXXX-XXXX-XXXX-XXXX"
-                          required
-                          value={cardNumber}
-                          onChange={handleCardNumberChange}
-                          className="p-2 border border-slate-400 outline-none"
-                        />
-                      </div>
+                  > */}
+                  <div className="flex justify-between items-center w-[70%]">
+                    <label>Card Number</label>
+                    <div className="flex justify-start w-1/2">
+                      <input
+                        type="text"
+                        placeholder="XXXX-XXXX-XXXX-XXXX"
+                        required
+                        value={cardNumber}
+                        onChange={handleCardNumberChange}
+                        className="p-2 border border-slate-400 outline-none"
+                      />
                     </div>
-                    <div className="flex justify-between items-center w-[70%]">
-                      <label>CVV / CVC / CVC2</label>
-                      <div className="flex justify-start w-1/2">
-                        <input
-                          type="text"
-                          placeholder="000"
-                          required
-                          value={cvv}
-                          onChange={handleCvvChange}
-                          className="w-20 p-2 border border-slate-400 outline-none"
-                        />
-                      </div>
+                  </div>
+                  <div className="flex justify-between items-center w-[70%]">
+                    <label>CVV / CVC / CVC2</label>
+                    <div className="flex justify-start w-1/2">
+                      <input
+                        type="text"
+                        placeholder="000"
+                        required
+                        value={cvv}
+                        onChange={handleCvvChange}
+                        className="w-20 p-2 border border-slate-400 outline-none"
+                      />
                     </div>
-                    <div className="flex justify-between items-center w-[70%]">
-                      <label>Expiration Date</label>
-                      <div className="flex justify-start w-1/2">
-                        <input
-                          type="text"
-                          placeholder="MM/YYYY"
-                          required
-                          value={expDate}
-                          onChange={handleExpDateChange}
-                          className="p-2 border border-slate-400 outline-none"
-                        />
-                      </div>
+                  </div>
+                  <div className="flex justify-between items-center w-[70%]">
+                    <label>Expiration Date</label>
+                    <div className="flex justify-start w-1/2">
+                      <input
+                        type="text"
+                        placeholder="MM/YYYY"
+                        required
+                        value={expDate}
+                        onChange={handleExpDateChange}
+                        className="p-2 border border-slate-400 outline-none"
+                      />
                     </div>
-                    <div className="flex justify-center mt-10">
-                      <button
-                        className="p-3 px-5 border bg-green-600 rounded-md text-white"
-                        // type="submit"
-                        onClick={handlePaymentClick}
-                      >
-                        {isLoading ? "Loading..." : "Make Payment"}
-                      </button>
-                    </div>
-                  </form>
+                  </div>
+                  <div className="flex justify-center mt-10">
+                    <button
+                      className={`p-3 w-40 border rounded-md text-white ${
+                        isLoading ? "bg-green-400" : "bg-green-600"
+                      }`}
+                      // type="submit"
+                      disabled={isLoading}
+                      onClick={handlePaymentClick}
+                    >
+                      {isLoading ? "Loading..." : "Make Payment"}
+                    </button>
+                  </div>
+                  {/* </form> */}
                 </div>
               </div>
             </div>

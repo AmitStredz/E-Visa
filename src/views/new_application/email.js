@@ -29,7 +29,7 @@ export default function Personal_info() {
       <div className="w-full flex justify-center h mb-10">
         <div className="w-4/5 justify-start py-10 flex gap-5">
           <div>
-            <i class="ri-check-line text-7xl text-green-500"></i>
+            <i className="ri-check-line text-7xl text-green-500"></i>
           </div>
           <div className="w-[40rem] flex flex-col gap-5">
             <h1 className="text-[28px] font-semibold ">

@@ -9,6 +9,8 @@ import Email from "./views/new_application/email";
 import ConfirmEmail from "./views/new_application/dataControl";
 import Payment from "./views/new_application/payment";
 import { Hello } from "./views/new_application/hello";
+import Payment2 from "./views/new_application/payment2";
+import Temp from "./views/new_application/temp";
 
 const App = () => {
   return (
@@ -27,6 +29,8 @@ const App = () => {
         />
         <Route path="/payment" element={<Payment />} />
         <Route path="/hello" element={<Hello />} />
+        <Route path="/payment2" element={<Payment2 />} />
+        <Route path="/temp" element={<Temp />} />
       </Routes>
     </Router>
   );

@@ -24,12 +24,12 @@ export default function Payment2() {
     if (!status) {
       console.log("Status not found");
         // setIsLoading(false);
-        return;
+        // return;
     }
     if (!txnId) {
       console.log("txn_id not found");
         // setIsLoading(false);
-        return;
+        // return;
     }
 
     setTimeout(() => {

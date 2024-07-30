@@ -27,7 +27,7 @@ export default function DataControl() {
         setIsLoading(false);
         setTimeout(() => {
           navigate("/payment");
-        }, "2000");
+        }, "3000");
       } else {
         // console.log("UserId not confirmed...");
         setIsConfirmed(false);

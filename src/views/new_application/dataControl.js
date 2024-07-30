@@ -13,23 +13,23 @@ export default function DataControl() {
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log("userId", userId);
+  // console.log("userId", userId);
 
   useEffect(() => {
     const stored_userId = localStorage.getItem("user_id");
     if (stored_userId) {
-      console.log("Stored UserId: ", stored_userId);
+      // console.log("Stored UserId: ", stored_userId);
     }
     if (userId) {
       if (userId == stored_userId) {
-        console.log("UserId confirmed...");
+        // console.log("UserId confirmed...");
         setIsConfirmed(true);
         setIsLoading(false);
         setTimeout(() => {
           navigate("/payment");
         }, "2000");
       } else {
-        console.log("UserId not confirmed...");
+        // console.log("UserId not confirmed...");
         setIsConfirmed(false);
         setIsLoading(false);
       }

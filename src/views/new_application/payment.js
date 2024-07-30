@@ -16,22 +16,22 @@ export default function Payment() {
 
   const handleCardNumberChange = (e) => {
     const value = e.target.value;
-    console.log("value: ", value);
+    // console.log("value: ", value);
 
     if (!isNaN(value) && value.length <= 16) {
       setCardNumber(value);
     } else {
-      console.log("not a number");
+      // console.log("not a number");
     }
   };
   const handleCvvChange = (e) => {
     const value = e.target.value;
-    console.log("value: ", value);
+    // console.log("value: ", value);
 
     if (!isNaN(value) && value.length <= 3) {
       setCvv(value);
     } else {
-      console.log("not a number");
+      // console.log("not a number");
     }
   };
 
@@ -39,8 +39,8 @@ export default function Payment() {
     const value = e.target.value;
     const cleanValue = value?.match(/\d+/g)?.join("");
 
-    console.log("value: ", value);
-    console.log("cleanvalue: ", cleanValue);
+    // console.log("value: ", value);
+    // console.log("cleanvalue: ", cleanValue);
 
     if (value?.length > 7) {
       return;
@@ -52,13 +52,13 @@ export default function Payment() {
     }
 
     if (value?.length == 2) {
-      console.log("1");
+      // console.log("1");
       setExpDate(value + "/");
       return;
     }
 
     if (cleanValue?.length <= 6) {
-      console.log("sliced: ", cleanValue.slice(0, 2), cleanValue.slice(2));
+      // console.log("sliced: ", cleanValue.slice(0, 2), cleanValue.slice(2));
       setExpDate(
         cleanValue.slice(0, 2) + "/" + cleanValue.slice(2, cleanValue.length)
       );
@@ -101,9 +101,9 @@ export default function Payment() {
     }
 
     const userid = localStorage.getItem("user_id");
-    console.log("UserId:", userid);
+    // console.log("UserId:", userid);
     if (!userid) {
-      console.log("UserId not found");
+      // console.log("UserId not found");
       setIsLoading(false);
       return;
     }
@@ -119,11 +119,11 @@ export default function Payment() {
       cvv: cvv,
     };
 
-    console.log("data: ", data);
-    console.log(
-      "link: " +
-        `https://evisa-6a188817e8b4.herokuapp.com/payments/payment-details/${userid}/create_payment/`
-    );
+    // console.log("data: ", data);
+    // console.log(
+    //   "link: " +
+    //     `https://evisa-6a188817e8b4.herokuapp.com/payments/payment-details/${userid}/create_payment/`
+    // );
 
     try {
       const response = await axios.post(
@@ -131,25 +131,25 @@ export default function Payment() {
         data
       );
 
-      console.log("Response: ", response);
+      // console.log("Response: ", response);
 
       if (response?.data?.payment_details) {
         localStorage.setItem("status", response?.data.payment_details?.status);
         localStorage.setItem("txn_id", response?.data.payment_details?.txn_id);
         // localStorage.setItem("amount", response.payment_details.txn_id);
-        console.log("status: ", response?.data?.payment_details?.status);
-        console.log("txn_id: ", response?.data?.payment_details?.txn_id);
+        // console.log("status: ", response?.data?.payment_details?.status);
+        // console.log("txn_id: ", response?.data?.payment_details?.txn_id);
 
         navigate("/payment2");
       }
     } catch (error) {
-      console.log("Error: ", error);
+      // console.log("Error: ", error);
       if (error?.response) {
-        console.log("Error Data: ", error.response.data);
-        console.log("Error Status: ", error.response.status);
-        console.log("Error Headers: ", error.response.headers);
+        // console.log("Error Data: ", error.response.data);
+        // console.log("Error Status: ", error.response.status);
+        // console.log("Error Headers: ", error.response.headers);
       } else {
-        console.log("Error Message: ", error.message);
+        // console.log("Error Message: ", error.message);
       }
     } finally {
       setIsLoading(false);

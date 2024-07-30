@@ -18,23 +18,23 @@ export default function Payment2() {
     setStatus(localStorage.getItem("status"));
     // const amount = localStorage.getItem("amount");
     setTxnId(localStorage.getItem("txn_id"));
-    console.log("status: ", status);
-    console.log("txn_id: ", txnId);
+    // console.log("status: ", status);
+    // console.log("txn_id: ", txnId);
 
     if (!status) {
-      console.log("Status not found");
-        // setIsLoading(false);
-        // return;
+    //   console.log("Status not found");
+    //     // setIsLoading(false);
+    //     // return;
     }
     if (!txnId) {
-      console.log("txn_id not found");
-        // setIsLoading(false);
-        // return;
+    //   console.log("txn_id not found");
+    //     // setIsLoading(false);
+    //     // return;
     }
 
     setTimeout(() => {
       setIsLoading(false);
-      console.log("isloading: ", isLoading);
+    //   console.log("isloading: ", isLoading);
     }, 3000);
   }, []);
 

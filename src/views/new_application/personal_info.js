@@ -150,7 +150,7 @@ export default function Personal_info() {
       // accept_terms : true
     };
 
-    console.log("Data", data);
+    // console.log("Data", data);
 
     try {
       const response = await axios.post(
@@ -162,16 +162,16 @@ export default function Personal_info() {
           },
         }
       );
-      console.log("Response: ", response);
+      // console.log("Response: ", response);
 
       if (response) {
-        console.log("UserId: ", response.data.user_id);
+        // console.log("UserId: ", response.data.user_id);
         localStorage.setItem("user_id", response.data.user_id);
       }
       navigate("/email");
     } catch (error) {
       setIsLoading(false);
-      console.error("There was an error!", error);
+      // console.error("There was an error!", error);
       alert(
         "There was some Network Error: " +
           (error.response?.data || error.message)

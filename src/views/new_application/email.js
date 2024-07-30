@@ -22,17 +22,17 @@ export default function Personal_info() {
       <Header></Header>
 
       <div
-        className="w-screen h-96 bg-bottom bg-cover"
+        className="w-screen h-40 sm:h-96 bg-bottom bg-cover"
         style={{ backgroundImage: `url(${img1})` }}
       ></div>
 
-      <div className="w-full flex justify-center h mb-10">
-        <div className="w-4/5 justify-start py-10 flex gap-5">
+      <div className="w-full flex flex-col justify-center items-center h mb-10">
+        <div className="w-full lg:w-4/5 justify-start p-10 flex sm:gap-5">
           <div>
-            <i className="ri-check-line text-7xl text-green-500"></i>
+            <i className="ri-check-line text-5xl sm:text-7xl text-green-500"></i>
           </div>
           <div className="w-[40rem] flex flex-col gap-5">
-            <h1 className="text-[28px] font-semibold ">
+            <h1 className="text-[24px] sm:text-[28px] font-semibold max-sm:leading-8">
               Your Application has been Successfully Completed.
             </h1>
             <p>
@@ -49,7 +49,7 @@ export default function Personal_info() {
             ) : (
               <div className="flex justify-center h-14">
                 <button
-                  className=" w-5/12 py-4 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium bg-blue-600 hover:bg-blue-700 text-white"
+                  className=" sm:w-5/12 py-4 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium bg-blue-600 hover:bg-blue-700 text-white"
                   data-aos="fade-in"
                   onClick={handleResendClick}
                 >
@@ -58,9 +58,10 @@ export default function Personal_info() {
               </div>
             )}
           </div>
-
+        </div>
+        <div className="p-5 sm:p-10">
           <div
-            className="mt-6 bg-yellow-100 border-l-4 border-yellow-500 text-red-700 p-4 w-[30rem] absolute right-10 top-96"
+            className="lg:absolute mt-6 bg-yellow-100 border-l-4 border-yellow-500 text-red-700 p-4 sm:w-[30rem] right-10 top-96"
             role="alert"
           >
             <p className="font-bold mb-5">Information Note:</p>

@@ -50,8 +50,8 @@ export default function Payment2() {
 
         <div className="w-full flex justify-center h mb-10">
           <div className="flex flex-col w-4/5 justify-start py-10  gap-5">
-            <div className="flex justify-center gap-2 items-center">
-              <div className="flex flex-col justify-center items-center gap-5  font-mono w-[50rem]">
+            <div className="flex justify-center gap-2 items-center text-center">
+              <div className="flex flex-col justify-center items-center gap-5 font-mono sm:w-[50rem]">
                 {isLoading && (
                   <>
                     <RotatingLines
@@ -65,7 +65,7 @@ export default function Payment2() {
                       wrapperStyle={{}}
                       wrapperClass=""
                     />
-                    <div className="flex flex-col gap- w-96">
+                    <div className="flex flex-col gap- sm:w-96">
                       <div className="bg-slate-400 p-2 px-5">
                         <span>Txn Id: </span>
                         <span>{txnId}</span>

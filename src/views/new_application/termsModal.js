@@ -3,7 +3,7 @@ import React from "react";
 const termsModal = ({ onClose }) => {
   return (
     <div
-      className="flex justify-center items-center w-screen h-screen fixed top-0 left-0 backdrop-blur-sm"
+      className="flex justify-center items-center w-screen h-screen p-5 fixed top-10 sm:top-0 left-0 backdrop-blur-sm overflow-auto"
       data-aos="zoom-in"
     >
       <div className="max-w-3xl bg-slate-500 p-5">

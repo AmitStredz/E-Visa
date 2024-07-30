@@ -186,14 +186,14 @@ export default function Personal_info() {
       <Header></Header>
 
       <div
-        className="w-screen h-96 bg-bottom bg-cover"
+        className="w-screen h-40 sm:h-96 bg-bottom bg-cover"
         style={{ backgroundImage: `url(${img1})` }}
       ></div>
 
       <div className="w-full flex justify-center h mb-10">
-        <div className="w-4/5 justify-start py-10 flex flex-col gap-5">
+        <div className="w-full lg:w-4/5 justify-start p-5 md:p-10 flex flex-col gap-5">
           <h1 className="text-[28px] font-semibold ">Application</h1>
-          <div className="flex items-center gap-1">
+          <div className="flex flex-wrap text-[14px] sm:text-[16px] items-center gap-1">
             <p className="text-slate-500">Country/Region</p>
             <p>{"->"}</p>
             <p className="text-slate-500">ArrivalDate</p>
@@ -206,7 +206,7 @@ export default function Personal_info() {
           <form
             action="#"
             method="POST"
-            className="w-[40rem] flex flex-col gap-5  p-5"
+            className="lg:w-[40rem] flex flex-col gap-5 sm:p-5"
           >
             <div class="flex gap-3 items-center justify-between w-full">
               <label
@@ -476,13 +476,13 @@ export default function Personal_info() {
               </label>
             </div>
 
-            <div class="flex justify-evenly mt-5">
+            <div class="flex flex-col sm:flex-row gap-2 justify-evenly mt-5">
               <button
                 //   onClick={()=> navigate('/arrivaldate')}
                 disabled={!isChecked}
                 type="submit"
                 name="save-continue"
-                class={`w-5/12 py-4 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium  ${
+                class={`sm:w-5/12 py-4 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium  ${
                   isChecked
                     ? "text-white bg-blue-600 hover:bg-blue-700"
                     : "bg-blue-300"
@@ -495,7 +495,7 @@ export default function Personal_info() {
                 disabled={!isChecked || isLoading}
                 type="submit"
                 name="save-continue"
-                class={`w-5/12 py-4 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium   ${
+                class={`sm:w-5/12 py-4 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium   ${
                   isChecked && !isLoading
                     ? "text-white bg-green-600  hover:bg-green-700"
                     : "bg-green-300"
@@ -531,7 +531,7 @@ export default function Personal_info() {
           </div>
 
           <div
-            className="mt-6 bg-yellow-100 border-l-4 border-yellow-500 text-red-700 p-4 w-[30rem] absolute right-10 top-96"
+            className="lg:absolute mt-6 bg-yellow-100 border-l-4 border-yellow-500 text-red-700 p-4 sm:w-[30rem]  right-10 top-96"
             role="alert"
           >
             <p className="font-bold mb-5">Information Note:</p>

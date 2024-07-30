@@ -15,15 +15,22 @@ export default function Payment() {
   const navigate = useNavigate();
 
   const handleCardNumberChange = (e) => {
-    const value = e.target.value;
-    // console.log("value: ", value);
-
-    if (!isNaN(value) && value.length <= 16) {
-      setCardNumber(value);
-    } else {
-      // console.log("not a number");
+    let value = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
+  
+    if (value.length > 16) {
+      value = value.slice(0, 16); // Limit to 16 characters
     }
+  
+    // Add dashes after every 4th character
+    value = value.replace(/(.{4})/g, "$1-").trim();
+    if (value.endsWith("-")) {
+      value = value.slice(0, -1); // Remove trailing dash
+    }
+  
+    setCardNumber(value);
   };
+  
+
   const handleCvvChange = (e) => {
     const value = e.target.value;
     // console.log("value: ", value);
@@ -163,14 +170,14 @@ export default function Payment() {
         <Header />
 
         <div
-          className="w-screen h-96 bg-bottom bg-cover"
+          className="w-screen h-40 sm:h-96 bg-bottom bg-cover"
           style={{ backgroundImage: `url(${img1})` }}
         ></div>
 
         <div className="w-full flex justify-center h mb-10">
-          <div className="flex flex-col w-4/5 justify-start py-10  gap-5">
+          <div className="flex flex-col w-full lg:w-4/5 justify-start p-5 sm:p-10  gap-5">
             <h1 className="text-[28px] font-semibold ">Payment</h1>
-            <div className="flex items-center gap-1 w-3/5 flex-wrap">
+            <div className="flex items-center gap-1 md:w-3/5 flex-wrap">
               <p className="text-slate-500">Country/Region</p>
               <p>{"->"}</p>
               <p className="text-slate-500">ArrivalDate</p>
@@ -186,7 +193,7 @@ export default function Payment() {
               <p className="font-semibold">Payment</p>
             </div>
 
-            <div className="flex flex-col gap-2 w-[40rem]">
+            <div className="flex flex-col gap-2 lg:w-[40rem]">
               <div className="flex justify-between p-3 border border-slate-400 bg-[#e4e2e2]">
                 <span className="text-[28px] font-semibold">Total Amount:</span>
                 <div className="flex flex-col items-end">
@@ -198,7 +205,7 @@ export default function Payment() {
               </div>
 
               <div>
-                <div className="flex justify-between p-3 border border-slate-400 bg-[#e4e2e2]">
+                <div className="flex flex-col sm:flex-row justify-between p-3 border border-slate-400 bg-[#e4e2e2]">
                   <span className="text-[18px]">Credit Card</span>
                   <div className="flex justify-center gap-1">
                     <img
@@ -220,14 +227,14 @@ export default function Payment() {
                     ></img>
                   </div>
                 </div>
-                <div className="bg-white p-5 object-contain border border-slate-400">
+                <div className="flex flex-col gap-5 sm:gap-2 bg-white p-5 object-contain border border-slate-400">
                   {/* <form
                     className="flex flex-col gap-3"
                     // onSubmit={handlePaymentClick}
                   > */}
-                  <div className="flex justify-between items-center w-[70%]">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center w-[70%]">
                     <label>Card Number</label>
-                    <div className="flex justify-start w-1/2">
+                    <div className="flex justify-start sm:w-1/2">
                       <input
                         type="text"
                         placeholder="XXXX-XXXX-XXXX-XXXX"
@@ -238,7 +245,7 @@ export default function Payment() {
                       />
                     </div>
                   </div>
-                  <div className="flex justify-between items-center w-[70%]">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center w-[70%]">
                     <label>CVV / CVC / CVC2</label>
                     <div className="flex justify-start w-1/2">
                       <input
@@ -251,7 +258,7 @@ export default function Payment() {
                       />
                     </div>
                   </div>
-                  <div className="flex justify-between items-center w-[70%]">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center w-[70%]">
                     <label>Expiration Date</label>
                     <div className="flex justify-start w-1/2">
                       <input
@@ -282,7 +289,7 @@ export default function Payment() {
             </div>
 
             <div
-              className="mt-6 bg-yellow-100 border-l-4 border-yellow-500 text-red-700 p-4 w-[30rem] absolute right-10 top-96"
+              className="xl:absolute mt-6 bg-yellow-100 border-l-4 border-yellow-500 text-red-700 p-4 sm:w-[30rem]  right-10 top-96"
               role="alert"
             >
               <p className="font-bold mb-5">Information Note:</p>

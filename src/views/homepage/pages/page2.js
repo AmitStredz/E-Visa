@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function page2() {
   return (
-    <div className='text-black p-10 px-24'>
+    <div className='text-black p-10 sm:px-24'>
       {/* <!-- Application Process Section --> */}
         <section class="mb-8">
             <h2 class="text-2xl font-bold mb-4">How to Apply for a Turkey E-Visa</h2>

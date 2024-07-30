@@ -44,7 +44,7 @@ export default function Arrivaldate() {
 
     localStorage.setItem("arrival_date", formattedToday);
 
-    navigate('/prerequisites');
+    navigate("/prerequisites");
   };
 
   return (
@@ -52,25 +52,25 @@ export default function Arrivaldate() {
       <Header></Header>
 
       <div
-        className="w-screen h-96 bg-bottom bg-cover"
+        className="w-screen h-40 sm:h-96 bg-bottom bg-cover -z-10"
         style={{ backgroundImage: `url(${img1})` }}
       ></div>
 
-      <div className="w-full flex justify-center h mb-10">
-        <div className="w-4/5 justify-start py-10 flex flex-col gap-5">
+      <div className="w-full flex justify-center h sm:mb-10 p-5">
+        <div className="w-full lg:w-4/5 justify-start py-10 flex flex-col gap-5">
           <h1 className="text-[28px] font-semibold ">Application</h1>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center text-[14px] sm:text-[16px] gap-1">
             <p className="text-slate-500">Country/Region</p>
             <p>{"->"}</p>
             <p className="font-semibold">ArrivalDate</p>
           </div>
           {/* date input here */}
-          <div className="flex flex-col gap-5 w-[50rem]">
+          <div className="flex flex-col gap-5 md:w-[50rem]">
             <label className="font-semibold">
               Select your Arrival date in Turkey:
               <input
                 type="date"
-                className="ml-2 border border-gray-300 rounded"
+                className="ml-2 border border-gray-300 rounded max-sm:text-black"
                 value={formattedToday}
                 onChange={handleDateChange}
               />
@@ -86,38 +86,38 @@ export default function Arrivaldate() {
               </p>
             </div>
 
-            <div className="flex items-center justify-evenly">
+            <div className="flex gap-2 items-center justify-evenly">
               <div className="relative">
                 <img src={calendar} className="w-24"></img>
-                <p className="absolute top-10 left-5 w-16 text-[14px] font-semibold">
+                <p className="absolute top-8 sm:top-10 left-3 sm:left-5 w-14 sm:w-16 text-[14px] max-sm:text-black font-semibold">
                   {arrivalDate}
                 </p>
               </div>
-              <div className="w-32 bg-slate-600 h-[2px]"></div>
+              <div className="w-5 sm:w-32 bg-slate-600 h-[2px] "></div>
               <div>
-                <p className="font-semibold text-3xl">180 Days</p>
+                <p className="font-semibold text-xl sm:text-3xl text-center">180 Days</p>
               </div>
-              <div className="w-32 bg-slate-600 h-[2px]"></div>
+              <div className="w-5 sm:w-32 bg-slate-600 h-[2px] "></div>
 
               <div className="relative">
                 <img src={calendar} className="w-24"></img>
-                <p className="absolute top-10 left-5 w-16 text-[14px] font-semibold">
+                <p className="absolute top-8 sm:top-10 left-3 sm:left-5 w-14 sm:w-16 text-[14px] max-sm:text-black font-semibold">
                   {futureDate}
                 </p>
               </div>
             </div>
 
             <div className="flex flex-col p-3 gap-5 bg-slate-900 bg-opacity-20 border-2 border-slate-400">
-              <div className="upper flex justify-evenly">
+              <div className="upper flex flex-col sm:flex-row items-center justify-evenly">
                 <p>
-                  Number of Entries:{" "}
+                  Number of Entries:
                   <span className="font-semibold">Single Entry</span>
                 </p>
                 <p>
                   Visa Fee: <span className="font-semibold">43 USD</span>
                 </p>
               </div>
-              <div className="flex justify-center gap-3">
+              <div className="flex flex-wrap justify-center gap-3">
                 <img src="/assets/visaLogo.png" className="w-20"></img>
                 <img src="/assets/JCBLogo.png" className="w-20 h-8 "></img>
                 <img src="/assets/UnionPayLogo.png" className="w-20 h-8"></img>
@@ -172,7 +172,7 @@ export default function Arrivaldate() {
           </div> */}
 
           <div
-            className="mt-6 bg-yellow-100 border-l-4 border-yellow-500 text-red-700 p-4 w-[30rem] absolute right-10 top-96"
+            className="xl:absolute mt-6 bg-yellow-100 border-l-4 border-yellow-500 text-red-700 p-4 sm:w-[30rem]  right-10 top-96"
             role="alert"
           >
             <p className="font-bold mb-5">Information Note:</p>

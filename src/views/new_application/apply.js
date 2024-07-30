@@ -57,18 +57,18 @@ export default function Apply() {
       <Header></Header>
 
       <div
-        className="w-screen h-96 bg-bottom bg-cover"
+        className=" w-screen h-40 sm:h-96 bg-bottom bg-cover -z-10"
         style={{ backgroundImage: `url(${img1})` }}
       ></div>
 
-      <div className="w-full flex justify-center h mb-10">
-        <div className="w-4/5 justify-start py-10 flex flex-col gap-5">
+      <div className="w-full flex justify-center h sm:mb-10 ">
+        <div className="w-11/12 sm:w-4/5 justify-start py-10 flex flex-col gap-5">
           <h1 className="text-[28px] font-semibold ">Application</h1>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center text-[14px] sm:text-[16px] gap-1">
             <p className="font-semibold">Country/Region</p>
           </div>
 
-          <form action="#" method="POST" className="w-2/5 gap-3">
+          <form action="#" method="POST" className="sm:w-3/4 md:w-3/5 xl:w-2/5 gap-3">
             {/* <!-- Visa Type --> */}
             <div class="mb-4">
               <label for="visa-type" class="block text-md ">
@@ -80,7 +80,7 @@ export default function Apply() {
                 onChange={(e) => setVisaType(e.target.value)}
                 id="visa-type"
                 name="visa-type"
-                class="mt-1 block w-full py-2 p-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm cursor-pointer"
+                class="mt-1 block w-full py-2 p-3 border border-gray-300 bg-white max-sm:text-black rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm cursor-pointer"
               >
                 <option value="" disabled selected>
                   Select a Visa type
@@ -112,7 +112,7 @@ export default function Apply() {
                 selected={countryRegion}
                 onSelect={(code) => setCountryRegion(code)}
               /> */}
-              <div>{CountrySelector()}</div>
+              <div className="max-sm:text-black">{CountrySelector()}</div>
             </div>
             {/* <!-- Travel Document --> */}
             <div className="mb-4">
@@ -125,7 +125,7 @@ export default function Apply() {
                 required
                 id="travel-document"
                 name="travel-document"
-                className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm cursor-pointer"
+                className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white max-sm:text-black rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm cursor-pointer"
               >
                 <option value="" disabled selected>
                   Select a Travel Document type
@@ -161,12 +161,12 @@ export default function Apply() {
             </div>
             <img src={captchaImg}></img> */}
             {/* <!-- Submit Buttons --> */}
-            <div class="flex justify-between mt-5">
+            <div class="flex flex-col sm:flex-row justify-between gap-3 mt-5">
               <button
                 type="submit"
                 disabled={!capVal}
                 name="ongoing-application"
-                className={`w-5/12 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium  ${
+                className={`sm:w-5/12 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium  ${
                   capVal ? "text-white bg-blue-600 hover:bg-blue-700" : "bg-blue-300"
                 }`}
               >
@@ -177,7 +177,7 @@ export default function Apply() {
                 type="submit"
                 disabled={!capVal}
                 name="save-continue"
-                className={`w-5/12 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium  ${
+                className={`sm:w-5/12 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium  ${
                   capVal ? "text-white bg-green-600 hover:bg-green-700" : "bg-green-300"
                 }`}
               >
@@ -186,7 +186,7 @@ export default function Apply() {
             </div>
           </form>
 
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-5 ">
             <p>
               <span className="font-semibold">Important Note: </span>Fields with
               (*) must have correct details. Leaving it blank will halt the
@@ -211,7 +211,7 @@ export default function Apply() {
           </div>
 
           <div
-            className="absolute right-10 top-[52rem] mt-6 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4"
+            className="xl:absolute right-10 top-[52rem] mt-6 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4"
             // role="alert"
           >
             <p className="font-bold">Important Notes:</p>
@@ -240,7 +240,7 @@ export default function Apply() {
           </div>
 
           <div
-            className="mt-6 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 w-[30rem] absolute right-10 top-96"
+            className="xl:absolute mt-6 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 sm:w-[30rem]  right-10 top-96"
             role="alert"
           >
             <p className="font-bold mb-5">Information Note:</p>

@@ -42,13 +42,13 @@ export default function DataControl() {
         <Header />
 
         <div
-          className="w-screen h-96 bg-bottom bg-cover"
+          className="w-screen h-60 sm:h-96 bg-bottom bg-cover"
           style={{ backgroundImage: `url(${img1})` }}
         ></div>
 
         <div className="w-full flex justify-center h mb-10">
-          <div className="flex flex-col w-4/5 justify-start py-10  gap-5">
-            <div className="flex items-center gap-1">
+          <div className="flex flex-col sm:w-4/5 justify-start p-5 sm:py-10  gap-5">
+            <div className="flex flex-wrap items-center text-[14px] sm:text-[16px] gap-1">
               <p className="text-slate-500">Country/Region</p>
               <p>{"->"}</p>
               <p className="text-slate-500">ArrivalDate</p>
@@ -61,7 +61,7 @@ export default function DataControl() {
               <p>{"->"}</p>
               <p className="font-semibold">Data Control</p>
             </div>
-            <h1 className="text-[28px] font-semibold ">
+            <h1 className="text-[22px] sm:text-[28px] font-semibold ">
               {(isLoading || isConfirmed) && (
                 <ThreeDots
                   visible={true}
@@ -82,7 +82,6 @@ export default function DataControl() {
                       : "Your data is not verified. Please try again later."
                   }`}
             </h1>
-            {/* <span>wewe</span> */}
           </div>
         </div>
       </div>

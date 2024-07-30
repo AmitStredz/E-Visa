@@ -8,7 +8,10 @@ export default function Header() {
 
   return (
     <div className="w-screen h-24 top-0 flex gap-5 justify-between p-2 sm:p-5  sm:px-10 xl:px-20 text-black bg-slate-200">
-      <div className="flex items-center cursor-pointer">
+      <div
+        className="flex items-center cursor-pointer"
+        onClick={() => navigate("/homepage")}
+      >
         <img src={turkeyLogo} className="w-14"></img>
         <a
           className="text-[30px] font-bold text-red-600"

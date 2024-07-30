@@ -16,20 +16,19 @@ export default function Payment() {
 
   const handleCardNumberChange = (e) => {
     let value = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
-  
+
     if (value.length > 16) {
       value = value.slice(0, 16); // Limit to 16 characters
     }
-  
+
     // Add dashes after every 4th character
     value = value.replace(/(.{4})/g, "$1-").trim();
     if (value.endsWith("-")) {
       value = value.slice(0, -1); // Remove trailing dash
     }
-  
+
     setCardNumber(value);
   };
-  
 
   const handleCvvChange = (e) => {
     const value = e.target.value;
@@ -96,11 +95,12 @@ export default function Payment() {
     if (isLoading) return;
     setIsLoading(true);
 
-    if (cardNumber.length != 16) {
+    if (cardNumber.replace(/-/g, '').length != 16) {
       alert("Enter valid Card number.");
       setIsLoading(false);
       return;
     }
+
     if (cvv.length != 3) {
       alert("Enter valid CVV number.");
       setIsLoading(false);
@@ -121,12 +121,12 @@ export default function Payment() {
       amount: "44",
       currency: "USD",
       order_id: orderId,
-      card_number: cardNumber,
+      card_number: cardNumber.replace(/-/g, ''),
       card_expiry: expDate,
       cvv: cvv,
     };
 
-    // console.log("data: ", data);
+    console.log("data: ", data);
     // console.log(
     //   "link: " +
     //     `https://evisa-6a188817e8b4.herokuapp.com/payments/payment-details/${userid}/create_payment/`
@@ -150,7 +150,7 @@ export default function Payment() {
         navigate("/payment2");
       }
     } catch (error) {
-      // console.log("Error: ", error);
+      console.log("Error: ", error);
       if (error?.response) {
         // console.log("Error Data: ", error.response.data);
         // console.log("Error Status: ", error.response.status);

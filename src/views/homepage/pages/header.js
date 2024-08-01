@@ -49,7 +49,7 @@ export default function Header() {
       ></img>
 
       {isGlobe && (
-        <div className="absolute flex justify-center items-center p-6 top-0 left-0 h-screen bg-black bg-opacity-40 w-screen">
+        <div className="absolute flex justify-center items-center p-6 top-0 left-0 h-screen bg-black bg-opacity-40 w-screen z-50">
           <div className="flex flex-col items-center md:w-[60%] xl:w-[30%] bg-white sm:p-10">
             <div className="flex justify-end w-full">
               <IoClose size={40} onClick={() => setIsGlobe(false)} className="cursor-pointer" />

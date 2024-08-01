@@ -18,7 +18,7 @@ export default function Terms() {
 
       <div className="w-full flex flex-col justify-center items-center h mb-10">
         <div
-          className="w-full flex flex-col justify-start p-10 px-40  sm:gap-7 text-black"
+          className="w-full flex flex-col justify-start p-5 sm:p-10 md:px-10 lg:px-40 gap-5  sm:gap-7 text-black"
           data-aos="fade-up"
         >
           <div className="flex items-center justify-between w-full">

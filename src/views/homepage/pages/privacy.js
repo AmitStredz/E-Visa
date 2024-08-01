@@ -16,7 +16,7 @@ export default function Privacy() {
       ></div>
 
       <div className="w-full flex flex-col justify-center items-center h mb-10">
-        <div className="w-full flex flex-col justify-start p-10 px-40  sm:gap-5 text-black" data-aos="fade-up">
+        <div className="w-full flex flex-col justify-start p-5 sm:p-10 lg:px-40 gap-5 text-black" data-aos="fade-up">
           <div className="flex items-center justify-between w-full mb-10">
             <div className="h-[2px] bg-slate-400 w-full"></div>
             <span className="border border-slate-500 p-2 w-full text-center">

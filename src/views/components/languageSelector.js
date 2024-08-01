@@ -51,7 +51,7 @@ const LanguageSelector = ({onclose}) => {
 
   const handleLanguageChange = (lang) => {
     onclose();
-    console.log("Cookies: ", cookies.googtrans);
+    // console.log("Cookies: ", cookies.googtrans);
     const selectField = document.querySelector("select.goog-te-combo");
     if (selectField) {
       selectField.value = lang;

@@ -14,3 +14,33 @@ body, html{
 #google_translate_element {
   display: none;
 }
+
+/* Hide the Google Translate banner */
+.goog-te-banner-frame {
+  display: none !important;
+}
+
+/* Hide the Google Translate frame */
+.goog-te-gadget-icon {
+  display: none !important;
+}
+
+/* Hide the Google Translate menu */
+.goog-te-gadget {
+  display: none !important;
+}
+
+/* Ensure the body content is visible */
+body {
+  top: 0px !important;
+}
+
+/* Ensure the translate frame is not visible */
+#goog-translate-element {
+  display: none !important;
+}
+
+/* Additional styling if needed */
+.goog-te-menu-value {
+  color: transparent !important;
+}

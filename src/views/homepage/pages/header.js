@@ -39,7 +39,7 @@ export default function Header() {
       </div>
 
       <div className="w-full hidden lg:flex">
-        <LanguageSelector />
+        <LanguageSelector onclose={()=>{}}/>
         <div id="google_translate_element"></div>
       </div>
       <img

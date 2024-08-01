@@ -8,6 +8,8 @@ import { useNavigate } from "react-router";
 
 export default function Footer() {
   const navigate = useNavigate();
+
+
   return (
     <div className="bg-black bg-opacity-40">
       <div className="flex justify-center sm:justify-start gap-5 sm:gap-10 p-5 sm:p-10 sm:px-40 text-white">

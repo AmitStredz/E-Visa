@@ -5,7 +5,10 @@
 body, html{
   margin: 0px;
   padding: 0px;
+}
+body{
   top: 0px !important;
+
 }
 .goog-te-banner-frame.skiptranslate {
   display: none !important;
@@ -43,4 +46,11 @@ body {
 /* Additional styling if needed */
 .goog-te-menu-value {
   color: transparent !important;
+}
+
+/* Prevent the Google Translate popup from appearing on hover */
+.goog-tooltip,
+.goog-tooltip:hover,
+.goog-text-highlight {
+    display: none !important;
 }

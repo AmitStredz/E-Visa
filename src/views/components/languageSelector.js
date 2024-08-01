@@ -35,6 +35,7 @@
 // export default LanguageSelector;
 
 import React, { useState } from "react";
+import { Cookies, useCookies } from "react-cookie";
 
 // import turkeyFlag from '../assets/turkeyFlag.webp';
 // import IndiaFlag from '../assets/indiaFlag.webp';
@@ -44,11 +45,13 @@ import React, { useState } from "react";
 // import EspanolFlag from '../assets/espanolFlag.webp';
 
 const LanguageSelector = ({onclose}) => {
-  const [isSelected, setISelected] = useState("en");
+  const [cookies, setCookies] = useCookies(['googtrans']);
+
+  // const ere = Cookies.get
 
   const handleLanguageChange = (lang) => {
     onclose();
-    setISelected(lang);
+    console.log("Cookies: ", cookies.googtrans);
     const selectField = document.querySelector("select.goog-te-combo");
     if (selectField) {
       selectField.value = lang;
@@ -69,10 +72,10 @@ const LanguageSelector = ({onclose}) => {
   // ];
 
   return (
-    <div className="flex gap-1 flex-wrap items-center justify-center w-full">
+    <div className="flex gap-1 flex-wrap items-center justify-center w-full notranslate">
       <button
         className={`flex items-center gap-1 p-1 px-4 border rounded-lg hover:border-slate-500 transition-all ${
-          isSelected == "en"
+          cookies.googtrans == "/en/en"
             ? "border-slate-600 bg-black bg-opacity-30 "
             : "border-slate-400"
         }`}
@@ -83,7 +86,7 @@ const LanguageSelector = ({onclose}) => {
       </button>
       <button
         className={`flex items-center gap-1 p-1 px-4 border rounded-lg hover:border-slate-500 transition-all ${
-          isSelected == "ar"
+          cookies.googtrans == "/en/ar"
             ? "border-slate-600 bg-black bg-opacity-30 "
             : "border-slate-400"
         }`}
@@ -94,7 +97,7 @@ const LanguageSelector = ({onclose}) => {
       </button>
       <button
         className={`flex items-center gap-1 p-1 px-4 border rounded-lg hover:border-slate-500 transition-all ${
-          isSelected == "fr"
+          cookies.googtrans == "/en/fr"
             ? "border-slate-600 bg-black bg-opacity-30 "
             : "border-slate-400"
         }`}
@@ -105,7 +108,7 @@ const LanguageSelector = ({onclose}) => {
       </button>
       <button
         className={`flex items-center gap-1 p-1 px-4 border rounded-lg hover:border-slate-500 transition-all ${
-          isSelected == "de"
+          cookies.googtrans == "/en/de"
             ? "border-slate-600 bg-black bg-opacity-30 "
             : "border-slate-400"
         }`}
@@ -116,7 +119,7 @@ const LanguageSelector = ({onclose}) => {
       </button>
       <button
         className={`flex items-center gap-1 p-1 px-4 border rounded-lg hover:border-slate-500 transition-all ${
-          isSelected == "es"
+          cookies.googtrans == "/en/es"
             ? "border-slate-600 bg-black bg-opacity-30 "
             : "border-slate-400"
         }`}
@@ -127,7 +130,7 @@ const LanguageSelector = ({onclose}) => {
       </button>
       <button
         className={`flex items-center gap-1 p-1 px-4 border rounded-lg hover:border-slate-500 transition-all ${
-          isSelected == "zh-CN"
+          cookies.googtrans == "/en/zh-CN"
             ? "border-slate-600 bg-black bg-opacity-30 "
             : "border-slate-400"
         }`}
@@ -138,7 +141,7 @@ const LanguageSelector = ({onclose}) => {
       </button>
       <button
         className={`flex items-center gap-1 p-1 px-4 border rounded-lg hover:border-slate-500 transition-all ${
-          isSelected == "zh-TW"
+          cookies.googtrans == "/en/zh-TW"
             ? "border-slate-600 bg-black bg-opacity-30 "
             : "border-slate-400"
         }`}
@@ -149,7 +152,7 @@ const LanguageSelector = ({onclose}) => {
       </button>
       <button
         className={`flex items-center gap-1 p-1 px-4 border rounded-lg hover:border-slate-500 transition-all ${
-          isSelected == "hi"
+          cookies.googtrans == "/en/hi"
             ? "border-slate-600 bg-black bg-opacity-30 "
             : "border-slate-400"
         }`}
@@ -160,7 +163,7 @@ const LanguageSelector = ({onclose}) => {
       </button>
       <button
         className={`flex items-center gap-1 p-1 px-4 border rounded-lg hover:border-slate-500 transition-all ${
-          isSelected == "tr"
+          cookies.googtrans == "/en/tr"
             ? "border-slate-600 bg-black bg-opacity-30 "
             : "border-slate-400"
         }`}

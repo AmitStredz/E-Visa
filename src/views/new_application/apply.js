@@ -53,7 +53,7 @@ export default function Apply() {
   };
 
   return (
-    <div className="overflow-hidden text-black relative">
+    <div className="overflow-hidden text-black relative z-[]">
       <Header></Header>
 
       <div
@@ -61,7 +61,7 @@ export default function Apply() {
         style={{ backgroundImage: `url(${img1})` }}
       ></div>
 
-      <div className="w-full flex justify-center h sm:mb-10 ">
+      <div className="w-full flex justify-center h sm:mb-10 z-[1000000000]">
         <div className="w-11/12 sm:w-4/5 justify-start py-10 flex flex-col gap-5">
           <h1 className="text-[28px] font-semibold ">Application</h1>
           <div className="flex items-center text-[14px] sm:text-[16px] gap-1">

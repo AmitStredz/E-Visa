@@ -10,7 +10,7 @@ export default function Page1() {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className="p-2">
       <div
         className="w-full flex justify-center md:px-10 bg-no-repeat bg-cover bg-bottom bg-opacity-10"
         style={{ backgroundImage: `url(${img1})` }}

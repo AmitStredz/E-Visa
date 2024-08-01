@@ -13,7 +13,7 @@ export default function Header() {
   // const { t } = useTranslation();
 
   return (
-    <div className="w-screen h-24 top-0 flex gap-2 sm:gap-5 justify-between p-5 sm:px-10 xl:px- text-black bg-slate-200">
+    <div className="relative w-screen h-24 top-0 flex gap-2 sm:gap-5 justify-between p-5 sm:px-10 xl:px- text-black bg-slate-200">
       <div className="flex gap-2 items-center w-full">
         <div
           className="flex flex-col sm:flex-row items-center cursor-pointer"
@@ -49,7 +49,7 @@ export default function Header() {
       ></img>
 
       {isGlobe && (
-        <div className="absolute flex justify-center items-center p-6 top-0 left-0 h-screen bg-black bg-opacity-40 w-screen z-50">
+        <div className="fixed flex justify-center items-center p-6 top-0 left-0 h-screen bg-black bg-opacity-40 w-screen z-50">
           <div className="flex flex-col items-center md:w-[60%] xl:w-[30%] bg-white sm:p-10">
             <div className="flex justify-end w-full">
               <IoClose size={40} onClick={() => setIsGlobe(false)} className="cursor-pointer" />

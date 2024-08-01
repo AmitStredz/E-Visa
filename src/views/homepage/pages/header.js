@@ -45,6 +45,14 @@ export default function Header() {
         </button>
         <IoIosMenu size={30} className="lg:hidden" />
       </div>
+
+      <div className="absolute flex flex-col sm:hidden bg-white gap-5">
+        <a className="cursor-pointer">About</a>
+        <a className="cursor-pointer">Services</a>
+        <a className="cursor-pointer">Country</a>
+        <a className="cursor-pointer">Visa</a>
+        <a className="cursor-pointer">Blog</a>
+      </div>
     </div>
   );
 }

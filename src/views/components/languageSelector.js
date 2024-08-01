@@ -44,18 +44,18 @@ import { Cookies, useCookies } from "react-cookie";
 // import GermanFlag from '../assets/germanFlag.webp';
 // import EspanolFlag from '../assets/espanolFlag.webp';
 
-const LanguageSelector = ({onclose}) => {
-  const [cookies, setCookies] = useCookies(['googtrans']);
+const LanguageSelector = ({ onclose }) => {
+  const [cookies, setCookies] = useCookies(["googtrans"]);
 
   // const ere = Cookies.get
 
   const handleLanguageChange = (lang) => {
-    onclose();
     // console.log("Cookies: ", cookies.googtrans);
     const selectField = document.querySelector("select.goog-te-combo");
     if (selectField) {
       selectField.value = lang;
       selectField.dispatchEvent(new Event("change"));
+      onclose();
     }
   };
 

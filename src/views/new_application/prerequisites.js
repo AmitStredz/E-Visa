@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Await, useNavigate } from "react-router";
-import axios from "axios";
 
 import Header from "../homepage/pages/header";
 import Footer from "../homepage/pages/footer";
 import img1 from "./assets/applyBanner.jpg";
-import { Cookies } from "react-cookie";
 
 export default function Prerequisites() {
   const [prerequisitesCheck, setPrerequisitesCheck] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
-  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [checkAll, setCheckAll] = useState(false);
 
   const [checks, setChecks] = useState({
     term1: false,
@@ -21,6 +19,8 @@ export default function Prerequisites() {
     term5: false,
   });
 
+  const navigate = useNavigate();
+
   const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
     setChecks((prevChecks) => ({
@@ -29,11 +29,12 @@ export default function Prerequisites() {
     }));
   };
 
-  const allChecked = Object.values(checks).every(Boolean);
+  let allChecked = Object.values(checks).every(Boolean);
 
   useEffect(() => {
     setPrerequisitesCheck(allChecked);
-  });
+    if (allChecked) setCheckAll(true);
+  }, [allChecked]);
 
   const handleNextClick = async () => {
     if (isLoading) return; //prevents from multiple clicks
@@ -42,8 +43,41 @@ export default function Prerequisites() {
     if (allChecked) {
       localStorage.setItem("prerequisites_check", true);
       navigate("/personalinfo");
+    } else {
+      setIsLoading(false);
     }
   };
+
+  const handleCheckAll = () => {
+    const newCheckAll = !checkAll;
+    setCheckAll(newCheckAll);
+
+    const updatedChecks = Object.keys(checks).reduce((acc, key) => {
+      acc[key] = newCheckAll;
+      return acc;
+    }, {});
+
+    setChecks(updatedChecks);
+  };
+
+  // const handleCheckAll = () => {
+  //   setCheckAll(!checkAll);
+  //   console.log("checkAll: ", checkAll);
+  //   console.log("allChecked before: ", allChecked);
+  //   allChecked = !allChecked;
+
+  //   const updatedChecks = Object.keys(checks).reduce((acc, key) => {
+  //     acc[key] = checkAll;
+  //     console.log("checks: ", checks);
+  //     handleCheckboxChange(checks);
+
+  //     return acc;
+  //   }, {});
+
+  //   setChecks(updatedChecks);
+  //   console.log("allChecked after: ", allChecked);
+  // };
+
   return (
     <div className="overflow-hidden text-black relative">
       <Header></Header>
@@ -132,14 +166,25 @@ export default function Prerequisites() {
               above.
             </label>
           </div>
+          <label className="flex items-center font-semibold">
+            <input
+              type="checkbox"
+              name="chechAll"
+              checked={checkAll && allChecked}
+              onChange={handleCheckAll}
+              className="text-2xl mr-2"
+              size={1}
+            ></input>
+            Check All
+          </label>
 
           <div className="flex justify-center lg:w-[50rem]">
             <button
-              disabled={!allChecked}
+              disabled={!allChecked || !checkAll}
               className={`w-48 py-4 px-8 border border-transparent rounded-md shadow-sm text-sm font-medium  ${
-                allChecked
-                  ? "text-white bg-blue-600 hover:bg-blue-700"
-                  : "bg-blue-300"
+                !allChecked || !checkAll
+                  ? "bg-blue-300 "
+                  : "text-white bg-blue-600 hover:bg-blue-700"
               }`}
               onClick={handleNextClick}
             >

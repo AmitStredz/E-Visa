@@ -7,6 +7,7 @@ import img1 from "./assets/applyBanner.jpg";
 
 export default function Personal_info() {
   const [mailSent, setMailSent] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleResendClick = () => {
@@ -15,6 +16,14 @@ export default function Personal_info() {
       setMailSent(false);
       // navigate('/payment');
     }, "4000");
+  };
+
+  const handleOnNextClick = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      navigate("/payment");
+    }, 2000);
   };
 
   return (
@@ -47,13 +56,27 @@ export default function Personal_info() {
                 <p data-aos="fade-in">Email Sent Succesfully...</p>
               </div>
             ) : (
-              <div className="flex justify-center h-14">
+              <div
+                className="flex flex-col sm:flex-row justify-between gap-3 h-14"
+                data-aos="fade-in"
+              >
                 <button
                   className=" sm:w-5/12 py-4 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium bg-blue-600 hover:bg-blue-700 text-white"
-                  data-aos="fade-in"
                   onClick={handleResendClick}
                 >
                   Resend e-mail
+                </button>
+                <button
+                  disabled={isLoading}
+                  className={`sm:w-5/12 py-4 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
+                    isLoading
+                      ? "bg-green-400"
+                      : " bg-green-600 hover:bg-green-700"
+                  }`}
+                  // data-aos="fade-in"
+                  onClick={handleOnNextClick}
+                >
+                  {isLoading ? "Loading..." : "Continue & Exit"}
                 </button>
               </div>
             )}

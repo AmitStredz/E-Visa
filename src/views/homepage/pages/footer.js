@@ -9,7 +9,6 @@ import { useNavigate } from "react-router";
 export default function Footer() {
   const navigate = useNavigate();
 
-
   return (
     <div className="bg-black bg-opacity-40">
       <div className="flex justify-center sm:justify-start gap-5 sm:gap-10 p-5 sm:p-10 sm:px-40 text-white">
@@ -23,7 +22,10 @@ export default function Footer() {
           >
             New Application
           </ul>
-          <ul className="hover:underline cursor-pointer">
+          <ul
+            className="hover:underline cursor-pointer"
+            onClick={() => navigate("/status")}
+          >
             Ongoing Application
           </ul>
         </div>
@@ -38,8 +40,10 @@ export default function Footer() {
           <h1 className="text-[18px] sm:text-[20px] font-semibold">
             Contact Us
           </h1>
-          <ul className="hover:underline cursor-pointer">+91 987654321</ul>
-          <ul className="hover:underline cursor-pointer">abc@gmail.com</ul>
+          {/* <ul className="hover:underline cursor-pointer">+91 987654321</ul> */}
+          <ul className="hover:underline cursor-pointer">
+            info@turkey-visa-gov.org
+          </ul>
         </div>
       </div>
 

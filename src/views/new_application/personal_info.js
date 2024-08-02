@@ -8,42 +8,76 @@ import img1 from "./assets/applyBanner.jpg";
 import TermsModal from "./termsModal";
 import axios from "axios";
 import { Cookies } from "react-cookie";
+import { FiInfo } from "react-icons/fi";
+
+import DetailsModal from "./detailsModal";
 
 export default function Personal_info() {
-  const [firstName, setFirstName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [dob, setDob] = useState("");
-  const [placeOfBirth, setPlaceOfBirth] = useState("");
-  const [motherName, setMotherName] = useState("");
-  const [fatherName, setFatherName] = useState("");
-  const [passportNo, setPassportNo] = useState("");
-  const [passportIssueDate, setPassportIssueDate] = useState("");
-  const [passportExpiryDate, setPassportExpiryDate] = useState("");
-  const [supportingDocType, setSupportingDocType] = useState("");
-  const [supportingDocForm, setSupportingDocForm] = useState("");
-  const [supportingDocNo, setSupportingDocNo] = useState("");
-  const [supportingDocExpiryDate, setSupportingDocExpiryDate] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNo, setPhoneNo] = useState("");
-  const [address, setAddress] = useState("");
+  // const [firstName, setFirstName] = useState("");
+  // const [surname, setSurname] = useState("");
+  // const [dob, setDob] = useState("");
+  // const [placeOfBirth, setPlaceOfBirth] = useState("");
+  // const [motherName, setMotherName] = useState("");
+  // const [fatherName, setFatherName] = useState("");
+  // const [passportNo, setPassportNo] = useState("");
+  // const [passportIssueDate, setPassportIssueDate] = useState("");
+  // const [passportExpiryDate, setPassportExpiryDate] = useState("");
+  // const [supportingDocType, setSupportingDocType] = useState("");
+  // const [supportingDocForm, setSupportingDocForm] = useState("");
+  // const [supportingDocNo, setSupportingDocNo] = useState("");
+  // const [supportingDocExpiryDate, setSupportingDocExpiryDate] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [phoneNo, setPhoneNo] = useState("");
+  // const [address, setAddress] = useState("");
+  const [users, setUsers] = useState([]);
+  const [currentUser, setCurrentUser] = useState({
+    firstName: "",
+    surname: "",
+    dob: "",
+    pob: "",
+    motherName: "",
+    fatherName: "",
+    passportNumber: "",
+    passportIssueDate: "",
+    passportExpiryDate: "",
+    supportingDocType: "",
+    supportingDocForm: "",
+    supportingDocNo: "",
+    supportingDocExpiryDate: "",
+    email: "",
+    phoneNo: "",
+    address: "",
+  });
 
   const [isFormValid, setIsFormValid] = useState(false); //to check e-mail validity.
 
-  const [showModal, setShowModal] = useState(false);
+  const [showTermsModal, setShowTermsModal] = useState(false);
+  const [showAddPersonModal, setShowAddPersonModal] = useState(false);
+  const [showOnNextModal, setShowOnNextModal] = useState(false);
+
   const [isChecked, setIsChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setCurrentUser({ ...currentUser, [name]: value });
+  };
+
   const handleCheckboxClick = () => {
+    console.log("checked: ", isChecked);
+
     if (isChecked) {
+      console.log("if");
       setIsChecked(false);
     } else {
-      setShowModal(true);
+      console.log("else");
+      setShowTermsModal(true);
     }
   };
 
   const handleModalClose = () => {
-    setShowModal(false);
+    setShowTermsModal(false);
     setIsChecked(!isChecked);
   };
 
@@ -53,132 +87,164 @@ export default function Personal_info() {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       // const isNameValid = fullName.trim() !== "";
 
-      setIsFormValid(emailRegex.test(email));
+      setIsFormValid(emailRegex.test(currentUser.email));
     };
 
     validateForm();
-  }, [email]);
+  }, [currentUser.email]);
 
-  const handleNextClick = async (e) => {
-    e.preventDefault();
-    if (isLoading) return; // Prevent multiple clicks
-
-    // Validation
-    if (
-      !firstName ||
-      !surname ||
-      !dob ||
-      !placeOfBirth ||
-      !motherName ||
-      !fatherName ||
-      !passportNo ||
-      !passportIssueDate ||
-      !passportExpiryDate ||
-      !supportingDocType ||
-      !supportingDocForm ||
-      !supportingDocNo ||
-      !supportingDocExpiryDate ||
-      !email ||
-      !phoneNo ||
-      !address
-    ) {
-      alert("Please fill in all the required fields.");
-      return;
-    }
+  const handleAddPerson = () => {
+    console.log("CurrentUser: ", currentUser);
+    // handleCheckboxClick();
+    setShowAddPersonModal(false);
 
     if (!isFormValid) {
       alert("Invalid e-mail. Please Enter a valid email Address.");
       return;
     }
 
-    setIsLoading(true);
+    setUsers([...users, currentUser]);
+    setCurrentUser({
+      firstName: "",
+      surname: "",
+      dob: "",
+      pob: "",
+      motherName: "",
+      fatherName: "",
+      passportNumber: "",
+      passportIssueDate: "",
+      passportExpiryDate: "",
+      supportingDocType: "",
+      supportingDocForm: "",
+      supportingDocNo: "",
+      supportingDocExpiryDate: "",
+      email: "",
+      phoneNo: "",
+      address: "",
+    });
+    console.log("Users: ", users);
+  };
 
-    // console.log("VisaType: ", localStorage.getItem("visa_type"));
-    // console.log("country_region: ", localStorage.getItem("country_region"));
-    // console.log("travel_document: ", localStorage.getItem("travel_document"));
-    // console.log("arrival_date: ", localStorage.getItem("arrival_date"));
-    // console.log(
-    //   "prerequisites_check: ",
-    //   localStorage.getItem("prerequisites_check")
-    // );
-
-    const data = {
-      first_name: firstName,
-      surname: surname,
-      date_of_birth: dob,
-      place_of_birth: placeOfBirth,
-      mothers_name: motherName,
-      fathers_name: fatherName,
-      passport_number: passportNo,
-      passport_issue_date: passportIssueDate,
-      passport_expiry_date: passportExpiryDate,
-      supporting_doc_type: supportingDocType,
-      supporting_doc_form: supportingDocForm,
-      supporting_doc_no: supportingDocNo,
-      supporting_doc_expiry_date: supportingDocExpiryDate,
-      email: email,
-      phone_number: phoneNo,
-      address: address,
-      accept_terms: true,
-      visa_type: localStorage.getItem("visa_type"),
-      country_region: localStorage.getItem("country_region"),
-      travel_document: localStorage.getItem("travel_document"),
-      arrival_date: localStorage.getItem("arrival_date"),
-      prerequisites_check: true,
-
-      // visa_type : "Electronic visa",
-      // country_region : "Ireland",
-      // travel_document : "Passport",
-      // arrival_date : "2024-07-01",
-      // prerequisites_check : true,
-      // first_name : "www",
-      // surname : "we",
-      // date_of_birth : "1990-01-01",
-      // place_of_birth : "www",
-      // mothers_name : "wwww",
-      // fathers_name : "wwww",
-      // passport_number : "22222",
-      // passport_issue_date : "2014-07-01",
-      // passport_expiry_date : "2024-07-01",
-      // supporting_doc_type : "visa",
-      // // supporting_doc_form : "ireland",
-      // supporting_doc_no : "22222",
-      // supporting_doc_expiry_date : "2024-07-31",
-      // email : "eee@er.joeeee",
-      // phone_number : "12222",
-      // address : "heloom",
-      // accept_terms : true
-    };
-
-    // console.log("Data", data);
-
-    try {
-      const response = await axios.post(
-        "https://evisa-6a188817e8b4.herokuapp.com/api/visa-applications/",
-        data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      // console.log("Response: ", response);
-
-      if (response) {
-        // console.log("UserId: ", response.data.user_id);
-        localStorage.setItem("user_id", response.data.user_id);
-      }
-      navigate("/email");
-    } catch (error) {
-      setIsLoading(false);
-      // console.error("There was an error!", error);
-      alert(
-        "There was some Network Error: " +
-          (error.response?.data || error.message)
-      );
-    } finally {
-      setIsLoading(false);
+  const handleNextClick1 = ()=>{
+    if(users.length == 0){
+      setShowOnNextModal(true);
+    }else{
+      handleNextClick2();
     }
+  }
+
+  const handleNextClick2 = async (e) => {
+    // e.preventDefault();
+    // if (isLoading) return; // Prevent multiple clicks
+    // // Validation
+    // // if (
+    // //   !firstName ||
+    // //   !surname ||
+    // //   !dob ||
+    // //   !placeOfBirth ||
+    // //   !motherName ||
+    // //   !fatherName ||
+    // //   !passportNo ||
+    // //   !passportIssueDate ||
+    // //   !passportExpiryDate ||
+    // //   !supportingDocType ||
+    // //   !supportingDocForm ||
+    // //   !supportingDocNo ||
+    // //   !supportingDocExpiryDate ||
+    // //   !email ||
+    // //   !phoneNo ||
+    // //   !address
+    // // ) {
+    // //   alert("Please fill in all the required fields.");
+    // //   return;
+    // // }
+    // // if (!isFormValid) {
+    // //   alert("Invalid e-mail. Please Enter a valid email Address.");
+    // //   return;
+    // // }
+    // setIsLoading(true);
+    // // console.log("VisaType: ", localStorage.getItem("visa_type"));
+    // // console.log("country_region: ", localStorage.getItem("country_region"));
+    // // console.log("travel_document: ", localStorage.getItem("travel_document"));
+    // // console.log("arrival_date: ", localStorage.getItem("arrival_date"));
+    // // console.log(
+    // //   "prerequisites_check: ",
+    // //   localStorage.getItem("prerequisites_check")
+    // // );
+    // // const data = {
+    // //   first_name: firstName,
+    // //   surname: surname,
+    // //   date_of_birth: dob,
+    // //   place_of_birth: placeOfBirth,
+    // //   mothers_name: motherName,
+    // //   fathers_name: fatherName,
+    // //   passport_number: passportNo,
+    // //   passport_issue_date: passportIssueDate,
+    // //   passport_expiry_date: passportExpiryDate,
+    // //   supporting_doc_type: supportingDocType,
+    // //   supporting_doc_form: supportingDocForm,
+    // //   supporting_doc_no: supportingDocNo,
+    // //   supporting_doc_expiry_date: supportingDocExpiryDate,
+    // //   email: email,
+    // //   phone_number: phoneNo,
+    // //   address: address,
+    // //   accept_terms: true,
+    // //   visa_type: localStorage.getItem("visa_type"),
+    // //   country_region: localStorage.getItem("country_region"),
+    // //   travel_document: localStorage.getItem("travel_document"),
+    // //   arrival_date: localStorage.getItem("arrival_date"),
+    // //   prerequisites_check: true,
+    //   // // visa_type : "Electronic visa",
+    //   // ''
+    //   // // country_region : "Ireland",
+    //   // // travel_document : "Passport",
+    //   // // arrival_date : "2024-07-01",
+    //   // // prerequisites_check : true,
+    //   // // first_name : "www",
+    //   // // surname : "we",
+    //   // // date_of_birth : "1990-01-01",
+    //   // // place_of_birth : "www",
+    //   // // mothers_name : "wwww",
+    //   // // fathers_name : "wwww",
+    //   // // passport_number : "22222",
+    //   // // passport_issue_date : "2014-07-01",
+    //   // // passport_expiry_date : "2024-07-01",
+    //   // // supporting_doc_type : "visa",
+    //   // // // supporting_doc_form : "ireland",
+    //   // // supporting_doc_no : "22222",
+    //   // // supporting_doc_expiry_date : "2024-07-31",
+    //   // // email : "eee@er.joeeee",
+    //   // // phone_number : "12222",
+    //   // // address : "heloom",
+    //   // // accept_terms : true
+    // };
+    // // console.log("Data", data);
+    // try {
+    //   const response = await axios.post(
+    //     "https://evisa-6a188817e8b4.herokuapp.com/api/visa-applications/",
+    //     data,
+    //     {
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //     }
+    //   );
+    //   // console.log("Response: ", response);
+    //   if (response) {
+    //     // console.log("UserId: ", response.data.user_id);
+    //     localStorage.setItem("user_id", response.data.user_id);
+    //   }
+    //   navigate("/email");
+    // } catch (error) {
+    //   setIsLoading(false);
+    //   // console.error("There was an error!", error);
+    //   alert(
+    //     "There was some Network Error: " +
+    //       (error.response?.data || error.message)
+    //   );
+    // } finally {
+    //   setIsLoading(false);
+    // }
   };
 
   return (
@@ -203,9 +269,38 @@ export default function Personal_info() {
             <p className="font-semibold">Personal Information</p>
           </div>
 
+          {users.length > 0 && (
+            <>
+              <div className=" flex flex-col gap-2 p-3 sm:p-7 sm:px-10 bg-slate-200 lg:w-[40rem]">
+                {users.map((user, index) => (
+                  <div
+                    key={index}
+                    className="flex justify-between p-2 border border-slate-500"
+                  >
+                    <div className="flex flex-col">
+                      <strong>
+                        {user.firstName} {user.surname}
+                      </strong>
+                      <span className="text-slate-500 text-[12px]">
+                        {user.email}
+                      </span>
+                    </div>
+                    <strong>{user.passportNumber}</strong>
+                  </div>
+                ))}
+
+                <div className="flex justify-end">
+                  <button className="p-1 px-4 bg-green-500 text-white" onClick={handleNextClick2}>
+                    Continue
+                  </button>
+                </div>
+              </div>
+            </>
+          )}
+
           <form
-            action="#"
-            method="POST"
+            // action="#"
+            // method="POST"
             className="lg:w-[40rem] flex flex-col gap-5 sm:p-5"
           >
             <div class="flex gap-3 items-center justify-between w-full">
@@ -216,8 +311,9 @@ export default function Personal_info() {
                 Given/First Name(s)
               </label>
               <input
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
+                name="firstName"
+                value={currentUser.firstName}
+                onChange={handleInputChange}
                 required
                 className="border-2 border-slate-400 h-8 w-3/5"
               ></input>
@@ -230,8 +326,9 @@ export default function Personal_info() {
                 Surname(s)
               </label>
               <input
-                value={surname}
-                onChange={(e) => setSurname(e.target.value)}
+                name="surname"
+                value={currentUser.surname}
+                onChange={handleInputChange}
                 required
                 className="border-2 border-slate-400 h-8 w-3/5"
               ></input>
@@ -244,8 +341,9 @@ export default function Personal_info() {
                 Date of Birth
               </label>
               <input
-                value={dob}
-                onChange={(e) => setDob(e.target.value)}
+                name="dob"
+                value={currentUser.dob}
+                onChange={handleInputChange}
                 required
                 className="border-2 border-slate-400 h-8"
                 type="date"
@@ -259,8 +357,9 @@ export default function Personal_info() {
                 Place of Birth
               </label>
               <input
-                value={placeOfBirth}
-                onChange={(e) => setPlaceOfBirth(e.target.value)}
+                name="pob"
+                value={currentUser.pob}
+                onChange={handleInputChange}
                 required
                 className="border-2 border-slate-400 h-8 w-3/5"
               ></input>
@@ -273,8 +372,9 @@ export default function Personal_info() {
                 Mother's Name
               </label>
               <input
-                value={motherName}
-                onChange={(e) => setMotherName(e.target.value)}
+                name="motherName"
+                value={currentUser.motherName}
+                onChange={handleInputChange}
                 required
                 className="border-2 border-slate-400 h-8 w-3/5"
               ></input>
@@ -287,8 +387,9 @@ export default function Personal_info() {
                 Father's Name
               </label>
               <input
-                value={fatherName}
-                onChange={(e) => setFatherName(e.target.value)}
+                name="fatherName"
+                value={currentUser.fatherName}
+                onChange={handleInputChange}
                 required
                 className="border-2 border-slate-400 h-8 w-3/5"
               ></input>
@@ -301,8 +402,9 @@ export default function Personal_info() {
                 Passport Number
               </label>
               <input
-                value={passportNo}
-                onChange={(e) => setPassportNo(e.target.value)}
+                name="passportNumber"
+                value={currentUser.passportNumber}
+                onChange={handleInputChange}
                 required
                 className="border-2 border-slate-400 h-8 w-3/5"
               ></input>
@@ -315,8 +417,9 @@ export default function Personal_info() {
                 Passport Issue Date
               </label>
               <input
-                value={passportIssueDate}
-                onChange={(e) => setPassportIssueDate(e.target.value)}
+                name="passportIssueDate"
+                value={currentUser.passportIssueDate}
+                onChange={handleInputChange}
                 required
                 className="border-2 border-slate-400 h-8"
                 type="date"
@@ -330,28 +433,14 @@ export default function Personal_info() {
                 Passport Expiry Date
               </label>
               <input
-                value={passportExpiryDate}
-                onChange={(e) => setPassportExpiryDate(e.target.value)}
+                name="passportExpiryDate"
+                value={currentUser.passportExpiryDate}
+                onChange={handleInputChange}
                 required
                 className="border-2 border-slate-400 h-8"
                 type="date"
               ></input>
             </div>
-            {/* <div class="flex gap-3 items-center justify-between w-full">
-              <label
-                for="visa-type"
-                class="block text-[16px] font-semibold w-2/5"
-              >
-                Passport Expiry Date
-              </label>
-              <input
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                required
-                className="border-2 border-slate-400 h-8 w-3/5"
-                type="date"
-              ></input>
-            </div> */}
             <div class="flex gap-3 items-center justify-between w-full">
               <label
                 for="visa-type"
@@ -361,8 +450,9 @@ export default function Personal_info() {
               </label>
               <select
                 className="border-2 border-slate-400 h-8 w-3/5"
-                value={supportingDocType}
-                onChange={(e) => setSupportingDocType(e.target.value)}
+                name="supportingDocType"
+                value={currentUser.supportingDocType}
+                onChange={handleInputChange}
               >
                 <option value="" disabled selected>
                   Select a Supporting Doc Type
@@ -380,8 +470,9 @@ export default function Personal_info() {
               </label>
               <select
                 className="border-2 border-slate-400 h-8 w-3/5 transition-all"
-                value={supportingDocForm}
-                onChange={(e) => setSupportingDocForm(e.target.value)}
+                value={currentUser.supportingDocForm}
+                name="supportingDocForm"
+                onChange={handleInputChange}
               >
                 <option value="" disabled selected>
                   Select a Supporting Doc Form
@@ -400,8 +491,9 @@ export default function Personal_info() {
                 Supporting Doc. No
               </label>
               <input
-                value={supportingDocNo}
-                onChange={(e) => setSupportingDocNo(e.target.value)}
+                name="supportingDocNo"
+                value={currentUser.supportingDocNo}
+                onChange={handleInputChange}
                 required
                 className="border-2 border-slate-400 h-8 w-3/5"
               ></input>
@@ -414,8 +506,9 @@ export default function Personal_info() {
                 Supp. Doc. Expiry Date
               </label>
               <input
-                value={supportingDocExpiryDate}
-                onChange={(e) => setSupportingDocExpiryDate(e.target.value)}
+                name="supportingDocExpiryDate"
+                value={currentUser.supportingDocExpiryDate}
+                onChange={handleInputChange}
                 required
                 className="border-2 border-slate-400 h-8"
                 type="date"
@@ -429,8 +522,9 @@ export default function Personal_info() {
                 E-mail address
               </label>
               <input
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                name="email"
+                value={currentUser.email}
+                onChange={handleInputChange}
                 required
                 className="border-2 border-slate-400 h-8 w-3/5"
               ></input>
@@ -443,8 +537,9 @@ export default function Personal_info() {
                 Phone Number
               </label>
               <input
-                value={phoneNo}
-                onChange={(e) => setPhoneNo(e.target.value)}
+                name="phoneNo"
+                value={currentUser.phoneNo}
+                onChange={handleInputChange}
                 required
                 className="border-2 border-slate-400 h-8 w-3/5"
               ></input>
@@ -457,8 +552,9 @@ export default function Personal_info() {
                 Address
               </label>
               <input
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
+                name="address"
+                value={currentUser.address}
+                onChange={handleInputChange}
                 required
                 className="border-2 border-slate-400 h-8 w-3/5"
               ></input>
@@ -478,7 +574,7 @@ export default function Personal_info() {
 
             <div class="flex flex-col sm:flex-row gap-2 justify-evenly mt-5">
               <button
-                //   onClick={()=> navigate('/arrivaldate')}
+                onClick={() => setShowAddPersonModal(true)}
                 disabled={!isChecked}
                 type="submit"
                 name="save-continue"
@@ -491,7 +587,7 @@ export default function Personal_info() {
                 Add a new Person
               </button>
               <button
-                onClick={handleNextClick}
+                onClick={handleNextClick1}
                 disabled={!isChecked || isLoading}
                 type="submit"
                 name="save-continue"
@@ -547,7 +643,35 @@ export default function Personal_info() {
             </ul>
           </div>
 
-          {showModal && <TermsModal onClose={() => handleModalClose(true)} />}
+          {showTermsModal && (
+            <TermsModal onClose={() => handleModalClose(true)} />
+          )}
+          {/* {showAddPersonModal && (
+            <div className="flex justify-center items-center w-screen h-screen p-5 fixed top-10 sm:top-0 left-0 backdrop-blur-sm overflow-auto">
+              <div className="flex items-center gap-3">
+                <FiInfo />
+                <h1>Verify Your Information</h1>
+              </div>
+              <div>
+                {currentUser.map((user) => {
+                  <span>{user}</span>;
+                })}
+              </div>
+            </div>
+          )} */}
+
+          <DetailsModal
+            isVisible={showAddPersonModal}
+            onClose={() => setShowAddPersonModal(false)}
+            onVerify={handleAddPerson}
+            user={currentUser}
+          />
+          <DetailsModal
+            isVisible={showOnNextModal}
+            onClose={() => setShowOnNextModal(false)}
+            onVerify={handleNextClick2}
+            user={currentUser}
+          />
         </div>
       </div>
       <Footer></Footer>

@@ -10,7 +10,7 @@ export default function Header() {
   const navigate = useNavigate();
 
   return (
-    <div className="relative w-screen h-24 top-0 flex gap-2 sm:gap-5 justify-between p-5 sm:px-10 xl:px- text-black bg-slate-200 z-[1000000000]">
+    <div className="relative w-screen h-24 top-0 flex gap-2 sm:gap-5 justify-between p-5 sm:px-10 xl:px- text-black bg-slate-200 z-[10000]">
       <div className="flex gap-2 items-center w-full">
         <div
           className="flex flex-col sm:flex-row items-center cursor-pointer"

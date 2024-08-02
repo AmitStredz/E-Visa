@@ -9,6 +9,7 @@ import Email from "./views/new_application/email";
 import ConfirmEmail from "./views/new_application/dataControl";
 import Payment from "./views/new_application/payment";
 import Payment2 from "./views/new_application/payment2";
+import Status from "./views/new_application/status";
 import Privacy from "./views/homepage/pages/privacy";
 import Terms from "./views/homepage/pages/terms";
 // import Temp from "./views/new_application/temp";
@@ -34,6 +35,7 @@ const App = () => {
         <Route path="/payment2" element={<Payment2 />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
+        <Route path="/status" element={<Status />} />
         {/* <Route path="/temp" element={<Temp />} /> */}
       </Routes>
     </Router>

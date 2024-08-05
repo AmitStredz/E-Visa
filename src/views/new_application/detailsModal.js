@@ -5,7 +5,7 @@ const detailsModal = ({ isVisible, onClose, onVerify, user }) => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center p-5 sm:p-10 bg-gray-800 bg-opacity-75 z-[100000]">
+    <div className="fixed inset-0 flex items-center justify-center p-5 sm:p-10 bg-gray-800 bg-opacity-75 z-[10000]">
       <div className="flex flex-col gap-5 bg-white p-3 sm:p-10 text-[14px] sm:text-[16px] rounded shadow-lg w-[40rem] overflow-y-scroll h-full">
         <div className="flex gap-2 items-center">
           <FiInfo size={40} />

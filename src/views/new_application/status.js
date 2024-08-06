@@ -122,7 +122,7 @@ export default function Status() {
         </div>
         <div className="p-5 sm:p-10">
           <div
-            className="lg:absolute mt-6 bg-yellow-100 border-l-4 border-yellow-500 text-red-700 p-4 sm:w-[30rem] right-10 top-96"
+            className="xl:absolute mt-6 bg-yellow-100 border-l-4 border-yellow-500 text-red-700 p-4 sm:w-[30rem] right-10 top-96"
             role="alert"
           >
             <p className="font-bold mb-5">Information Note:</p>

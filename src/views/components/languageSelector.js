@@ -139,7 +139,7 @@ const LanguageSelector = ({ onclose }) => {
         <img src="/assets/chinaFlag.webp" className="w-5"></img>
         简体中文
       </button>
-      <button
+      {/* <button
         className={`flex items-center gap-1 p-1 px-4 border rounded-lg hover:border-slate-500 transition-all ${
           cookies.googtrans == "/en/zh-TW"
             ? "border-slate-600 bg-black bg-opacity-30 "
@@ -149,7 +149,7 @@ const LanguageSelector = ({ onclose }) => {
       >
         <img src="/assets/chinaFlag.webp" className="w-5"></img>
         繁體中文
-      </button>
+      </button> */}
       <button
         className={`flex items-center gap-1 p-1 px-4 border rounded-lg hover:border-slate-500 transition-all ${
           cookies.googtrans == "/en/hi"

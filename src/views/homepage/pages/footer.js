@@ -4,14 +4,15 @@ import JCBLogo from "../assets/JCBLogo.png";
 import UnionPayLogo from "../assets/UnionPayLogo.png";
 import MasterCardLogo from "../assets/masterCard.png";
 import AliPayLogo from "../assets/AlipayLogo.svg";
+import ftLogo from "../assets/ft-logo.png";
 import { useNavigate } from "react-router";
 
 export default function Footer() {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-black bg-opacity-40">
-      <div className="flex justify-center sm:justify-start gap-5 sm:gap-10 p-5 sm:p-10 sm:px-40 text-white">
+    <div className="bg-black bg-opacity-60">
+      <div className="flex justify-center sm:justify-start gap-5 sm:gap-10 p-5 sm:p-10 md:px-40 text-white">
         <div className="text-[14px] flex flex-col gap-1 sm:gap-2">
           <h1 className="text-[18px] sm:text-[20px] font-semibold">
             Application
@@ -47,7 +48,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="flex flex-col px-40 text-black">
+      <div className="flex flex-col px-5 sm:px-10 lg:px-40 text-black">
         <div>
           <span
             className="hover:underline cursor-pointer"
@@ -71,6 +72,10 @@ export default function Footer() {
         <img src={MasterCardLogo} className="w-20 "></img>
         <img src={UnionPayLogo} className="w-20 h-8"></img>
         <img src={AliPayLogo} className="w-20 h-8"></img>
+      </div>
+
+      <div className="flex justify-center">
+        <img src={ftLogo}></img>
       </div>
     </div>
   );

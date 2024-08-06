@@ -10,7 +10,7 @@ export default function Header() {
   const navigate = useNavigate();
 
   return (
-    <div className="relative w-screen h-24 top-0 flex gap-2 sm:gap-5 justify-between p-5 sm:px-10 xl:px- text-black bg-slate-200 z-[1000000000]">
+    <div className="relative w-screen h-24 top-0 flex gap- sm:gap-0 xl:gap-5 justify-between p-3 sm:px-8 xl:px-10 xl:px- text-black bg-slate-200 z-[1000000000]">
       <div className="flex gap-2 items-center w-full">
         <div
           className="flex flex-col sm:flex-row items-center cursor-pointer"
@@ -27,16 +27,16 @@ export default function Header() {
         <div className="h-full w-[2px] bg-red-400"></div>
         <div className="flex flex-col">
           <span className="font-semibold font-serif text-[18px] sm:text-[28px] text-red-500">
-            Turkey Visa
+            Republic of Turkey
           </span>
           <span className="font-semibold font-serif text-[14px] sm:text-[20px] text-red-500">
-            Online Application System
+            Electronic Visa Application System
           </span>
         </div>
       </div>
 
       <div className="w-full hidden lg:flex">
-        <LanguageSelector onclose={()=>{}}/>
+        <LanguageSelector onclose={() => {}} />
         <div id="google_translate_element"></div>
       </div>
       <img
@@ -49,11 +49,15 @@ export default function Header() {
         <div className="fixed flex justify-center items-center p-6 top-0 left-0 h-screen bg-black bg-opacity-40 w-screen z-50">
           <div className="flex flex-col items-center md:w-[60%] xl:w-[30%] bg-white sm:p-10">
             <div className="flex justify-end w-full">
-              <IoClose size={40} onClick={() => setIsGlobe(false)} className="cursor-pointer" />
+              <IoClose
+                size={40}
+                onClick={() => setIsGlobe(false)}
+                className="cursor-pointer"
+              />
             </div>
             <img src="/globe.svg" className="w-20 sm:w-40"></img>
             <div className="p-5">
-              <LanguageSelector onclose={()=>setIsGlobe(false)}/>
+              <LanguageSelector onclose={() => setIsGlobe(false)} />
             </div>
           </div>
         </div>

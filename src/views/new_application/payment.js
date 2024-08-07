@@ -10,9 +10,20 @@ export default function Payment() {
   const [cardNumber, setCardNumber] = useState("");
   const [cvv, setCvv] = useState("");
   const [expDate, setExpDate] = useState("");
+  const [count, setcount] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const count = localStorage.getItem("count");
+    if (!count) {
+      console.log("count not found");
+      // alert("SessionId not found");
+    }else{
+      setcount(count);
+    }
+  }, []);
 
   const handleCardNumberChange = (e) => {
     let value = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
@@ -43,13 +54,13 @@ export default function Payment() {
 
   const handleExpDateChange = (e) => {
     let input = e.target.value;
-     // Remove all non-digit characters
-     input = input.replace(/\D/g, '');
+    // Remove all non-digit characters
+    input = input.replace(/\D/g, "");
 
-     // Insert slash after MM
-     if (input.length > 2) {
-         input = input.slice(0, 2) + '/' + input.slice(2, 6);
-     }
+    // Insert slash after MM
+    if (input.length > 2) {
+      input = input.slice(0, 2) + "/" + input.slice(2, 6);
+    }
 
     setExpDate(input);
   };
@@ -106,6 +117,7 @@ export default function Payment() {
   const handlePaymentClick = async () => {
     if (isLoading) return;
     setIsLoading(true);
+    console.log("1");
 
     if (cardNumber.replace(/-/g, "").length != 16) {
       alert("Enter valid Card number.");
@@ -119,18 +131,24 @@ export default function Payment() {
       return;
     }
 
-    const userid = localStorage.getItem("user_id");
+    // const userid = localStorage.getItem("user_id");
     // console.log("UserId:", userid);
-    if (!userid) {
-      // console.log("UserId not found");
-      setIsLoading(false);
-      return;
-    }
+    // if (!userid) {
+    //   console.log("UserId not found");
+    //   setIsLoading(false);
+    //   return;
+    // }
 
     const orderId = generateOrderId();
 
+    const sessionId = localStorage.getItem("session_id");
+    if (!sessionId) {
+      console.log("SessionId not found");
+      alert("SessionId not found");
+    }
+
     const data = {
-      amount: "44",
+      session_id: sessionId,
       currency: "USD",
       order_id: orderId,
       card_number: cardNumber.replace(/-/g, ""),
@@ -146,11 +164,11 @@ export default function Payment() {
 
     try {
       const response = await axios.post(
-        `https://evisa-6a188817e8b4.herokuapp.com/payments/payment-details/${userid}/create_payment/`,
+        `https://evisa-6a188817e8b4.herokuapp.com/payments/payment-details/create-payment/`,
         data
       );
 
-      // console.log("Response: ", response);
+      console.log("Response: ", response);
 
       if (response?.data?.payment_details) {
         localStorage.setItem("status", response?.data.payment_details?.status);
@@ -159,16 +177,24 @@ export default function Payment() {
         // console.log("status: ", response?.data?.payment_details?.status);
         // console.log("txn_id: ", response?.data?.payment_details?.txn_id);
 
-        navigate("/payment2");
+        navigate("/paymentStatus");
       }
     } catch (error) {
       console.log("Error: ", error);
-      if (error?.response) {
-        // console.log("Error Data: ", error.response.data);
+      if (error?.response?.data?.gateway_response?.data) {
+        console.log(
+          "Error Data: ",
+          error?.response?.data?.gateway_response?.data?.status
+        );
+        navigate("/paymentStatus");
+        localStorage.setItem(
+          "status",
+          error?.response?.data?.gateway_response?.data?.status
+        );
         // console.log("Error Status: ", error.response.status);
         // console.log("Error Headers: ", error.response.headers);
       } else {
-        // console.log("Error Message: ", error.message);
+        console.log("Error Message: ", error.message);
       }
     } finally {
       setIsLoading(false);
@@ -209,7 +235,7 @@ export default function Payment() {
               <div className="flex justify-between p-3 border border-slate-400 bg-[#e4e2e2]">
                 <span className="text-[28px] font-semibold">Total Amount:</span>
                 <div className="flex flex-col items-end">
-                  <span className="text-[32px] font-bold">44.50 USD</span>
+                  <span className="text-[32px] font-bold">{44.50 * count}</span>
                   <span className="text-[14px] text-slate-500">
                     (43 USD 1.50 USD Service fee)
                   </span>

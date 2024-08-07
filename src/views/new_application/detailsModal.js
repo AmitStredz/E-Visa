@@ -12,49 +12,49 @@ const detailsModal = ({ isVisible, onClose, onVerify, user }) => {
           <h2 className="text-2xl font-bold mb-2">Verify User Details</h2>
         </div>
         <p>
-          <strong>First Name:</strong> {user.firstName}
+          <strong>First Name:</strong> {user.first_name}
         </p>
         <p>
           <strong>Surname:</strong> {user.surname}
         </p>
         <p>
-          <strong>Date of Birth:</strong> {user.dob}
+          <strong>Date of Birth:</strong> {user.date_of_birth}
         </p>
         <p>
-          <strong>Place of Birth:</strong> {user.pob}
+          <strong>Place of Birth:</strong> {user.place_of_birth}
         </p>
         <p>
-          <strong>Mother's Name:</strong> {user.motherName}
+          <strong>Mother's Name:</strong> {user.mothers_name}
         </p>
         <p>
-          <strong>Father's Name:</strong> {user.fatherName}
+          <strong>Father's Name:</strong> {user.fathers_name}
         </p>
         <p>
-          <strong>Passport Number:</strong> {user.passportNumber}
+          <strong>Passport Number:</strong> {user.passport_number}
         </p>
         <p>
-          <strong>Passport Issue Date:</strong> {user.passportIssueDate}
+          <strong>Passport Issue Date:</strong> {user.passport_issue_date}
         </p>
         <p>
-          <strong>Passport Expiry Date:</strong> {user.passportExpiryDate}
+          <strong>Passport Expiry Date:</strong> {user.passport_expiry_date}
         </p>
         <p>
-          <strong>Supporting Doc. Type:</strong> {user.supportingDocType}
+          <strong>Supporting Doc. Type:</strong> {user.supporting_doc_type}
         </p>
         <p>
-          <strong>Supporting Doc. Form:</strong> {user.supportingDocForm}
+          <strong>Supporting Doc. Form:</strong> {user.supporting_doc_form}
         </p>
         <p>
-          <strong>Supporting Doc. Number:</strong> {user.supportingDocNo}
+          <strong>Supporting Doc. Number:</strong> {user.supporting_doc_no}
         </p>
         <p>
-          <strong>Supp Doc. Expiry Date:</strong> {user.supportingDocExpiryDate}
+          <strong>Supp Doc. Expiry Date:</strong> {user.supporting_doc_expiry_date}
         </p>
         <p>
           <strong>Email address:</strong> {user.email}
         </p>
         <p>
-          <strong>Phone Number:</strong> {user.phoneNo}
+          <strong>Phone Number:</strong> {user.phone_number}
         </p>
         <p>
           <strong>Address:</strong> {user.address}

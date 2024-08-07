@@ -8,15 +8,18 @@ import Personal_info from "./views/new_application/personal_info";
 import Email from "./views/new_application/email";
 import ConfirmEmail from "./views/new_application/dataControl";
 import Payment from "./views/new_application/payment";
-import Payment2 from "./views/new_application/payment2";
+import PaymentStatus from "./views/new_application/paymentStatus";
 import Status from "./views/new_application/status";
 import Privacy from "./views/homepage/pages/privacy";
 import Terms from "./views/homepage/pages/terms";
+import Faq from "./views/homepage/pages/faq";
+import ScrollToTop from "./ScrollToTop";
 // import Temp from "./views/new_application/temp";
 
 const App = () => {
   return (
     <Router>
+      <ScrollToTop/>
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/homepage" element={<Homepage />} />
@@ -30,12 +33,13 @@ const App = () => {
           element={<ConfirmEmail />}
         />
         <Route path="/payment" element={<Payment />} />
-        <Route path="/payment2" element={<Payment2 />} />
-        <Route path="/payment2" element={<Payment2 />} />
-        <Route path="/payment2" element={<Payment2 />} />
+        <Route path="/paymentStatus" element={<PaymentStatus />} />
+        {/* <Route path="/payment2" element={<Payment2 />} />
+        <Route path="/payment2" element={<Payment2 />} /> */}
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/status" element={<Status />} />
+        <Route path="/faq" element={<Faq />} />
         {/* <Route path="/temp" element={<Temp />} /> */}
       </Routes>
     </Router>

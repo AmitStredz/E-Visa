@@ -34,17 +34,25 @@ export default function Footer() {
           <h1 className="text-[18px] sm:text-[20px] font-semibold">
             About E-Visa
           </h1>
-          <ul className="hover:underline cursor-pointer">FAQ</ul>
-          <ul className="hover:underline cursor-pointer">Comments</ul>
+          <ul
+            className="hover:underline cursor-pointer"
+            onClick={() => navigate("/faq")}
+          >
+            FAQ
+          </ul>
+          {/* <ul className="hover:underline cursor-pointer">Comments</ul> */}
         </div>
         <div className="text-[14px] flex flex-col gap-1 sm:gap-2">
           <h1 className="text-[18px] sm:text-[20px] font-semibold">
             Contact Us
           </h1>
           {/* <ul className="hover:underline cursor-pointer">+91 987654321</ul> */}
-          <ul className="hover:underline cursor-pointer">
+          <a
+            className="hover:underline cursor-pointer"
+            href="mailto:info@turkey-visa-gov.org"
+          >
             info@turkey-visa-gov.org
-          </ul>
+          </a>
         </div>
       </div>
 

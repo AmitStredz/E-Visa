@@ -6,7 +6,7 @@ import img1 from "./assets/applyBanner.jpg";
 import { FaRegCircleCheck } from "react-icons/fa6";
 import { RotatingLines } from "react-loader-spinner";
 
-export default function Payment2() {
+export default function PaymentStatus() {
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState("");
   const [txnId, setTxnId] = useState("");

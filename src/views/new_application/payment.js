@@ -235,9 +235,9 @@ export default function Payment() {
               <div className="flex justify-between p-3 border border-slate-400 bg-[#e4e2e2]">
                 <span className="text-[28px] font-semibold">Total Amount:</span>
                 <div className="flex flex-col items-end">
-                  <span className="text-[32px] font-bold">{44.50 * count}</span>
+                  <span className="text-[32px] font-bold">{44.50 * count} USD</span>
                   <span className="text-[14px] text-slate-500">
-                    (43 USD 1.50 USD Service fee)
+                    ({44.50 * count - 1.50} USD 1.50 USD Service fee)
                   </span>
                 </div>
               </div>

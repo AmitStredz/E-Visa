@@ -10,10 +10,20 @@ export default function PaymentStatus() {
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState("");
   const [txnId, setTxnId] = useState("");
-
+  const [count, setCount] = useState();
 
   useEffect(() => {
     setIsLoading(true);
+
+    const count = localStorage.getItem("count");
+    console.log(count);
+    
+    if (count) {
+      setCount(count);
+    }else{
+      console.log("count not found");
+      // alert("SessionId not found");
+    }
 
     setStatus(localStorage.getItem("status"));
     // const amount = localStorage.getItem("amount");
@@ -72,7 +82,7 @@ export default function PaymentStatus() {
                       </div>
                       <div className="bg-slate-200 p-2 px-5">
                         <span>Amount: </span>
-                        <span>USD 44.50</span>
+                        <span>USD {44.50 * count}</span>
                       </div>
                       <div className="bg-slate-400 p-2 px-5">
                         <span>Status: </span>

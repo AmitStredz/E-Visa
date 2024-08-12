@@ -14,7 +14,7 @@ export default function Header() {
       <div className="flex gap-2 items-center w-full">
         <div
           className="flex flex-col sm:flex-row items-center cursor-pointer"
-          onClick={() => navigate("/homepage")}
+          onClick={() => navigate("/")}
         >
           <img src={turkeyLogo} className="w-14"></img>
           <a

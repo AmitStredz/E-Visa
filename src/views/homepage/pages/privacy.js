@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import Header from "./header";
 import Footer from "./footer";
-import img1 from "../assets/applyBanner.jpg";
+import img1 from "../assets/applyBanner.webp";
 
 export default function Privacy() {
   return (

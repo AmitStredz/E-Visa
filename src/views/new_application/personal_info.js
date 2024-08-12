@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 
 import Header from "../homepage/pages/header";
 import Footer from "../homepage/pages/footer";
-import img1 from "./assets/applyBanner.jpg";
+import img1 from "./assets/applyBanner.webp";
 
 import TermsModal from "./termsModal";
 import axios from "axios";
@@ -13,22 +13,6 @@ import { FiInfo } from "react-icons/fi";
 import DetailsModal from "./detailsModal";
 
 export default function Personal_info() {
-  // const [firstName, setFirstName] = useState("");
-  // const [surname, setSurname] = useState("");
-  // const [dob, setDob] = useState("");
-  // const [placeOfBirth, setPlaceOfBirth] = useState("");
-  // const [motherName, setMotherName] = useState("");
-  // const [fatherName, setFatherName] = useState("");
-  // const [passportNo, setPassportNo] = useState("");
-  // const [passportIssueDate, setPassportIssueDate] = useState("");
-  // const [passportExpiryDate, setPassportExpiryDate] = useState("");
-  // const [supportingDocType, setSupportingDocType] = useState("");
-  // const [supportingDocForm, setSupportingDocForm] = useState("");
-  // const [supportingDocNo, setSupportingDocNo] = useState("");
-  // const [supportingDocExpiryDate, setSupportingDocExpiryDate] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [phoneNo, setPhoneNo] = useState("");
-  // const [address, setAddress] = useState("");
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState({
     visa_type: localStorage.getItem("visa_type"),
@@ -182,94 +166,9 @@ export default function Personal_info() {
   const handleNextClick2 = async (e) => {
     // e.preventDefault();
     if (isLoading) return; // Prevent multiple clicks
-    // Validation
-    // if (
-    //   !firstName ||
-    //   !surname ||
-    //   !dob ||
-    //   !placeOfBirth ||
-    //   !motherName ||
-    //   !fatherName ||
-    //   !passportNo ||
-    //   !passportIssueDate ||
-    //   !passportExpiryDate ||
-    //   !supportingDocType ||
-    //   !supportingDocForm ||
-    //   !supportingDocNo ||
-    //   !supportingDocExpiryDate ||
-    //   !email ||
-    //   !phoneNo ||
-    //   !address
-    // ) {
-    //   alert("Please fill in all the required fields.");
-    //   return;
-    // }
-    // if (!isFormValid) {
-    //   alert("Invalid e-mail. Please Enter a valid email Address.");
-    //   return;
-    // }
-    // if (users.length == 0) {
-    //   if (isUserDataComplete(currentUser)) {
-    //     alert("Enter all field...");
-    //     return;
-    //   }
-    // }
+
     setIsLoading(true);
-    // console.log("VisaType: ", localStorage.getItem("visa_type"));
-    // console.log("country_region: ", localStorage.getItem("country_region"));
-    // console.log("travel_document: ", localStorage.getItem("travel_document"));
-    // console.log("arrival_date: ", localStorage.getItem("arrival_date"));
-    // console.log(
-    //   "prerequisites_check: ",
-    //   localStorage.getItem("prerequisites_check")
-    // );
-    // const data = {
-    //   first_name: firstName,
-    //   surname: surname,
-    //   date_of_birth: dob,
-    //   place_of_birth: placeOfBirth,
-    //   mothers_name: motherName,
-    //   fathers_name: fatherName,
-    //   passport_number: passportNo,
-    //   passport_issue_date: passportIssueDate,
-    //   passport_expiry_date: passportExpiryDate,
-    //   supporting_doc_type: supportingDocType,
-    //   supporting_doc_form: supportingDocForm,
-    //   supporting_doc_no: supportingDocNo,
-    //   supporting_doc_expiry_date: supportingDocExpiryDate,
-    //   email: email,
-    //   phone_number: phoneNo,
-    //   address: address,
-    //   accept_terms: true,
-    //   visa_type: localStorage.getItem("visa_type"),
-    //   country_region: localStorage.getItem("country_region"),
-    //   travel_document: localStorage.getItem("travel_document"),
-    //   arrival_date: localStorage.getItem("arrival_date"),
-    //   prerequisites_check: true,
-    // // visa_type : "Electronic visa",
-    // ''
-    // // country_region : "Ireland",
-    // // travel_document : "Passport",
-    // // arrival_date : "2024-07-01",
-    // // prerequisites_check : true,
-    // // first_name : "www",
-    // // surname : "we",
-    // // date_of_birth : "1990-01-01",
-    // // place_of_birth : "www",
-    // // mothers_name : "wwww",
-    // // fathers_name : "wwww",
-    // // passport_number : "22222",
-    // // passport_issue_date : "2014-07-01",
-    // // passport_expiry_date : "2024-07-01",
-    // // supporting_doc_type : "visa",
-    // // // supporting_doc_form : "ireland",
-    // // supporting_doc_no : "22222",
-    // // supporting_doc_expiry_date : "2024-07-31",
-    // // email : "eee@er.joeeee",
-    // // phone_number : "12222",
-    // // address : "heloom",
-    // // accept_terms : true
-    // };
+
     const data = {
       users: users,
     };
@@ -285,9 +184,7 @@ export default function Personal_info() {
         }
       );
       console.log("Response: ", response);
-      // if (response) {
-      //   console.log("UserId: ", response.data.user_id);
-      // }
+
       if (response.data.session_id) {
         localStorage.setItem("session_id", response.data.session_id);
         localStorage.setItem("count", users.length);
@@ -709,19 +606,6 @@ export default function Personal_info() {
           {showTermsModal && (
             <TermsModal onClose={() => handleModalClose(true)} />
           )}
-          {/* {showAddPersonModal && (
-            <div className="flex justify-center items-center w-screen h-screen p-5 fixed top-10 sm:top-0 left-0 backdrop-blur-sm overflow-auto">
-              <div className="flex items-center gap-3">
-                <FiInfo />
-                <h1>Verify Your Information</h1>
-              </div>
-              <div>
-                {currentUser.map((user) => {
-                  <span>{user}</span>;
-                })}
-              </div>
-            </div>
-          )} */}
 
           <DetailsModal
             isVisible={showAddPersonModal}

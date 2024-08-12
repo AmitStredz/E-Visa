@@ -4,7 +4,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 import Header from "../homepage/pages/header";
 import Footer from "../homepage/pages/footer";
-import img1 from "./assets/applyBanner.jpg";
+import img1 from "./assets/applyBanner.webp";
 
 export default function Status() {
   const [capVal, setCapVal] = useState("");

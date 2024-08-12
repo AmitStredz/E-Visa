@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import Header from "../homepage/pages/header";
 import Footer from "../homepage/pages/footer";
-import img1 from "./assets/applyBanner.jpg";
+// import img1 from "./assets/applyBanner.webp";
 import { FaRegCircleCheck } from "react-icons/fa6";
 import { RotatingLines } from "react-loader-spinner";
 
@@ -31,16 +31,16 @@ export default function PaymentStatus() {
     // console.log("status: ", status);
     // console.log("txn_id: ", txnId);
 
-    if (!status) {
-    //   console.log("Status not found");
-    //     // setIsLoading(false);
-    //     // return;
-    }
-    if (!txnId) {
-    //   console.log("txn_id not found");
-    //     // setIsLoading(false);
-    //     // return;
-    }
+    // if (!status) {
+    // //   console.log("Status not found");
+    // //     // setIsLoading(false);
+    // //     // return;
+    // }
+    // if (!txnId) {
+    // //   console.log("txn_id not found");
+    // //     // setIsLoading(false);
+    // //     // return;
+    // }
 
     setTimeout(() => {
       setIsLoading(false);

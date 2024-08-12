@@ -9,7 +9,7 @@ import SvgIcon from "@mui/material/SvgIcon"; // Correct import
 
 import Header from "./header";
 import Footer from "./footer";
-import img1 from "../assets/applyBanner.jpg";
+import img1 from "../assets/applyBanner.webp";
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -770,7 +770,7 @@ export default function Faq() {
                   accept payment, and you will need to create a new application.
                   If the problem persists, you should contact your bank for
                   assistance. In case you still cannot make a payment, please
-                  contact e-Visa Support Desk (Home Page > Contact Us).
+                  contact e-Visa Support Desk (Home Page {">"} Contact Us).
                 </Typography>
               </AccordionDetails>
             </Accordion>

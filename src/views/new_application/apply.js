@@ -8,7 +8,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 import Header from "../homepage/pages/header";
 import Footer from "../homepage/pages/footer";
-import img1 from "./assets/applyBanner.jpg";
+import img1 from "./assets/applyBanner.webp";
 import captchaImg from "./assets/captchaImg.png";
 import axios from "axios";
 
@@ -31,14 +31,21 @@ export default function Apply() {
       // console.log("Value: ", value.label);
     };
 
-    return <Select options={options} value={value} onChange={changeHandler} required />;
+    return (
+      <Select
+        options={options}
+        value={value}
+        onChange={changeHandler}
+        required
+      />
+    );
   }
 
   const handleNextClick = () => {
     if (isLoading) return; // Prevent multiple clicks
     setIsLoading(true);
 
-    if(!visaType || !countryRegion || !travelDoc){
+    if (!visaType || !countryRegion || !travelDoc) {
       alert("Please fill in all the required fields.");
       setIsLoading(false);
       return;
@@ -48,8 +55,7 @@ export default function Apply() {
     localStorage.setItem("country_region", countryRegion);
     localStorage.setItem("travel_document", travelDoc);
 
-    navigate('/arrivalDate');
-
+    navigate("/arrivalDate");
   };
 
   return (
@@ -68,7 +74,11 @@ export default function Apply() {
             <p className="font-semibold">Country/Region</p>
           </div>
 
-          <form action="#" method="POST" className="sm:w-3/4 md:w-3/5 xl:w-2/5 gap-3">
+          <form
+            action="#"
+            method="POST"
+            className="sm:w-3/4 md:w-3/5 xl:w-2/5 gap-3"
+          >
             {/* <!-- Visa Type --> */}
             <div class="mb-4">
               <label for="visa-type" class="block text-md ">
@@ -96,22 +106,6 @@ export default function Apply() {
               <label for="country-region" class="block text-md ">
                 Country/Region
               </label>
-              {/* <select
-                value={countryRegion}
-                onChange={(e) => setCountryRegion(e.target.value)}
-                type="text"
-                id="country-region"
-                name="country-region"
-                className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                required
-              ></select> */}
-              {/* <ReactFlagsSelect
-              // countryName={}
-                searchable
-                value = {countryRegion}
-                selected={countryRegion}
-                onSelect={(code) => setCountryRegion(code)}
-              /> */}
               <div className="max-sm:text-black">{CountrySelector()}</div>
             </div>
             {/* <!-- Travel Document --> */}
@@ -143,23 +137,10 @@ export default function Apply() {
             </div>
             {/* <!-- Security Verification --> */}
             <ReCAPTCHA
-              sitekey="6LfBywMqAAAAANVw0lvasqSPQ3yEO2gn3sHSPxjU"
+              sitekey="6LfGIyUqAAAAADZ6LMvFmOyUtOxzG0_MKBiUyGBK"
               onChange={(val) => setCapVal(val)}
             ></ReCAPTCHA>
-            {/* <div className="mb-4">
-              <label for="captcha" class="block text-md ">
-                Security Verification
-              </label>
-              <input
-                type="text"
-                id="captcha"
-                name="captcha"
-                placeholder="Enter the captcha code"
-                className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                required
-              />
-            </div>
-            <img src={captchaImg}></img> */}
+            
             {/* <!-- Submit Buttons --> */}
             <div class="flex flex-col sm:flex-row justify-between gap-3 mt-5">
               <button
@@ -167,7 +148,9 @@ export default function Apply() {
                 disabled={!capVal}
                 name="ongoing-application"
                 className={`sm:w-5/12 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium  ${
-                  capVal ? "text-white bg-blue-600 hover:bg-blue-700" : "bg-blue-300"
+                  capVal
+                    ? "text-white bg-blue-600 hover:bg-blue-700"
+                    : "bg-blue-300"
                 }`}
               >
                 I have an ongoing application
@@ -178,7 +161,9 @@ export default function Apply() {
                 disabled={!capVal}
                 name="save-continue"
                 className={`sm:w-5/12 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium  ${
-                  capVal ? "text-white bg-green-600 hover:bg-green-700" : "bg-green-300"
+                  capVal
+                    ? "text-white bg-green-600 hover:bg-green-700"
+                    : "bg-green-300"
                 }`}
               >
                 {isLoading ? "Loading..." : "Save and Continue"}

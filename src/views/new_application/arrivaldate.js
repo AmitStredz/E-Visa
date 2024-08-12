@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 
 import Header from "../homepage/pages/header";
 import Footer from "../homepage/pages/footer";
-import img1 from "./assets/applyBanner.jpg";
+import img1 from "./assets/applyBanner.webp";
 import calendar from "./assets/calendarImg.jpg";
 import axios from "axios";
 import { Cookies } from "react-cookie";
@@ -140,36 +140,6 @@ export default function Arrivaldate() {
             </div>
           </div>
 
-          {/* {selectedDate && (
-            <div>
-              <p>Selected Date: {selectedDate}</p>
-              <p>Date 180 days later: {futureDate}</p>
-            </div>
-          )} */}
-
-          {/* <div className="flex flex-col gap-5">
-            <p>
-              <span className="font-semibold">Important Note: </span>Fields with
-              (*) must have correct details. Leaving it blank will halt the
-              submission of the application. Inaccurate, mismatched, and
-              incomplete information may cause delay or cancellation of visa.
-              Enter the correct captcha code for security purposes.
-            </p>
-            <p>
-              To ensure accuracy, take time to review all the details in the
-              form before clicking Register. The application fee may vary on the
-              type of visa, nationality, and processing time chosen. The
-              applicant will receive a notification once the form gets submitted
-              successfully.
-            </p>
-            <p>
-              <span className="font-semibold">Disclaimer: </span>Turkish visa
-              issued by this commercial website is applied direclty at the
-              Governmet of Turkey Tmmigration office. Government of Turkey has
-              not appointed directly, indirectly or exclusively. We are not
-              affiliated with the Government of Turkey.
-            </p>
-          </div> */}
 
           <div
             className="xl:absolute mt-6 bg-yellow-100 border-l-4 border-yellow-500 text-red-700 p-4 sm:w-[30rem]  right-10 top-96"

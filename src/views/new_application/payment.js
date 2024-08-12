@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import Header from "../homepage/pages/header";
 import Footer from "../homepage/pages/footer";
-import img1 from "./assets/applyBanner.jpg";
+import img1 from "./assets/applyBanner.webp";
 import axios from "axios";
 import { useNavigate } from "react-router";
 
@@ -64,37 +64,6 @@ export default function Payment() {
 
     setExpDate(input);
   };
-  // const handleExpDateChange = (e) => {
-  //   const value = e.target.value;
-  //   const cleanValue = value?.match(/\d+/g)?.join("");
-
-  //   // console.log("value: ", value);
-  //   // console.log("cleanvalue: ", cleanValue);
-
-  //   if (value?.length > 7) {
-  //     return;
-  //   }
-
-  //   if (!isNaN(value) && value?.length < 2) {
-  //     setExpDate(cleanValue);
-  //     return;
-  //   }
-
-  //   if (value?.length == 2) {
-  //     // console.log("1");
-  //     setExpDate(value + "/");
-  //     return;
-  //   }
-
-  //   if (cleanValue?.length <= 6) {
-  //     // console.log("sliced: ", cleanValue.slice(0, 2), cleanValue.slice(2));
-  //     setExpDate(
-  //       cleanValue.slice(0, 2) + "/" + cleanValue.slice(2, cleanValue.length)
-  //     );
-  //     return;
-  //   }
-  // };
-
   const generateRandomNumber = (length) => {
     let randomNumber = "";
 
@@ -130,14 +99,6 @@ export default function Payment() {
       setIsLoading(false);
       return;
     }
-
-    // const userid = localStorage.getItem("user_id");
-    // console.log("UserId:", userid);
-    // if (!userid) {
-    //   console.log("UserId not found");
-    //   setIsLoading(false);
-    //   return;
-    // }
 
     const orderId = generateOrderId();
 

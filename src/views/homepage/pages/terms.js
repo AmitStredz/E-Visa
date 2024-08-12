@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 
 import Header from "./header";
 import Footer from "./footer";
-import img1 from "../assets/applyBanner.jpg";
+import img1 from "../assets/applyBanner.webp";
 
 export default function Terms() {
   return (
@@ -33,6 +33,81 @@ export default function Terms() {
             <span className="text-[14px]">Turkey Visa</span>
             <span className="text-[14px]">Online Application System</span>
           </div>
+          <div>
+          <span className="font-semibold">Disclaimer: Third-Party Service Provider</span>
+            <p>
+              Welcome to https://turkey-visa-gov.org. Please note that we are a
+              private company providing visa application assistance services. We
+              are not affiliated with the official government entities of
+              Turkey.
+            </p>
+          </div>
+          <div>
+          <span className="font-semibold">About Our Services</span>
+            <p>
+              At https://turkey-visa-gov.org, we specialize in assisting
+              travelers from the Netherlands and Sweden with their Turkey visa
+              applications. Our aim is to simplify the visa process by providing
+              expert guidance and comprehensive support.
+            </p>
+          </div>
+          <div>
+            <p className="font-semibold">Service Disclaimer</p>
+            <div className="px-2">
+              <li>
+                Non-Governmental Entity: [Your Visa Services Website] is not an
+                official government website. We operate as a third-party service
+                provider to help individuals and businesses apply for visas to
+                Turkey.
+              </li>
+              <li>
+                Independent Service: We offer visa application assistance
+                independently and are not associated with or endorsed by the
+                Turkish government or any other official body.
+              </li>
+            </div>
+          </div>
+          <div>
+            <p className="font-semibold">Our Commitment</p>
+            <div className="px-2">
+              <li>
+                Expert Assistance: Our team of experienced professionals is
+                dedicated to providing you with accurate information and support
+                throughout your visa application process.
+              </li>
+              <li>
+                Secure Process: We ensure that your personal information is
+                handled with the utmost security and confidentiality.
+              </li>
+              <li>
+                Efficient Service: We strive to make the visa application
+                process as efficient and straightforward as possible.
+              </li>
+            </div>
+          </div>
+          <div className="flex flex-col">
+            <span className="font-semibold">Contact Information</span>
+            <span>
+              If you have any questions or need further assistance, please do
+              not hesitate to contact us:
+            </span>
+            <div className="px-2">
+              <li>Email: info@turkey-visa-gov.org</li>
+              <li>Phone: +44 7445189960</li>
+              <li>
+                Customer Support: Available 24/7 to assist you with your
+                inquiries.
+              </li>
+            </div>
+          </div>
+          <div>
+            <span className="font-semibold">Terms of Service</span>
+            <p>
+              By using https://turkey-visa-gov.org, you agree to our terms and
+              conditions. We recommend reading these carefully to understand our
+              services and your responsibilities.
+            </p>
+          </div>
 
           {/* <div className="flex items-center gap-3 justify-between w-full">
             <div className="h-[2px] bg-slate-400 w-full"></div>
@@ -44,7 +119,7 @@ export default function Terms() {
             <span className="font-semibold">Application Center</span>
             <p>
               This refers to the organization e-Visa Turkey Visa Online
-              Application System, which operates the website turkey-visa-gov.com
+              Application System, which operates the website turkey-visa-gov.org
               and processes visa applications submitted through this platform.
             </p>
           </div>
@@ -55,7 +130,7 @@ export default function Terms() {
             <p>
               This refers to the individual applying for a visa, either on their
               own behalf or on behalf of another person, via the
-              turkey-visa-gov.com website.
+              turkey-visa-gov.org website.
             </p>
           </div>
 

@@ -1,6 +1,6 @@
 import React from "react";
 
-import img1 from "../assets/homeBanner4.jpg";
+import img1 from "../assets/homeBanner4.webp";
 import applyButton from "../assets/applyButton.jpg";
 import paymentButton from "../assets/paymentButton.jpg";
 import downloadButton from "../assets/downloadButton.jpg";

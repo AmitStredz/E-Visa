@@ -3,7 +3,7 @@ import { Await, useNavigate } from "react-router";
 
 import Header from "../homepage/pages/header";
 import Footer from "../homepage/pages/footer";
-import img1 from "./assets/applyBanner.jpg";
+import img1 from "./assets/applyBanner.webp";
 
 export default function Prerequisites() {
   const [prerequisitesCheck, setPrerequisitesCheck] = useState(false);
@@ -59,24 +59,6 @@ export default function Prerequisites() {
 
     setChecks(updatedChecks);
   };
-
-  // const handleCheckAll = () => {
-  //   setCheckAll(!checkAll);
-  //   console.log("checkAll: ", checkAll);
-  //   console.log("allChecked before: ", allChecked);
-  //   allChecked = !allChecked;
-
-  //   const updatedChecks = Object.keys(checks).reduce((acc, key) => {
-  //     acc[key] = checkAll;
-  //     console.log("checks: ", checks);
-  //     handleCheckboxChange(checks);
-
-  //     return acc;
-  //   }, {});
-
-  //   setChecks(updatedChecks);
-  //   console.log("allChecked after: ", allChecked);
-  // };
 
   return (
     <div className="overflow-hidden text-black relative">
